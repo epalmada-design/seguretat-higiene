@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agents causants de la contaminació: jocs de repàs</title>
+<style>
+:root{--bg:#eef3f6;--card:#fff;--ink:#16303d;--mute:#5b7482;--line:#cbd9e1;--brand:#0e6e8c;--ok:#1b7f4b;--okbg:#dff3e7;--ko:#b3261e;--kobg:#fbe3e1;--warn:#9a5b00;--warnbg:#fdf0d5;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1e26;--card:#182b36;--ink:#e6f0f5;--mute:#93aebb;--line:#2b4655;--brand:#4fc3e3;--ok:#5fd394;--okbg:#153a28;--ko:#ff8a80;--kobg:#42201e;--warn:#f5c26b;--warnbg:#3d2f10}}
+:root[data-theme="dark"]{--bg:#0f1e26;--card:#182b36;--ink:#e6f0f5;--mute:#93aebb;--line:#2b4655;--brand:#4fc3e3;--ok:#5fd394;--okbg:#153a28;--ko:#ff8a80;--kobg:#42201e;--warn:#f5c26b;--warnbg:#3d2f10}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",Verdana,sans-serif;line-height:1.45}
+main{max-width:900px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.65rem;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 16px}
+nav{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+nav button{flex:1;min-width:140px;padding:11px 8px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;font:inherit;font-weight:700;cursor:pointer}
+nav button[aria-selected="true"]{border-color:var(--brand);background:var(--brand);color:#fff}
+button:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.bar{display:flex;justify-content:space-between;color:var(--mute);font-size:.95rem;margin-bottom:8px;gap:8px}
+.big{font-size:5rem;text-align:center;line-height:1.1;margin:6px 0}
+.q{font-size:1.2rem;font-weight:700;text-align:center;margin:0 0 14px}
+.info{background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:.93rem;color:var(--mute)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.opts button{padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:1rem;font-weight:700;cursor:pointer}
+.opts button:disabled{cursor:default}
+.fb{margin-top:14px;display:grid;gap:8px}
+.fb div{padding:10px 12px;border-radius:10px;border-left:6px solid var(--line);background:var(--bg)}
+.fb .good{background:var(--okbg);border-color:var(--ok)}
+.fb .bad{background:var(--kobg);border-color:var(--ko)}
+.fb .miss{background:var(--warnbg);border-color:var(--warn)}
+.verdict{font-weight:700;font-size:1.1rem}
+.next{margin-top:14px;padding:12px 22px;border:0;border-radius:12px;background:var(--brand);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.end{text-align:center;padding:20px 0}
+.two{display:grid;grid-template-columns:1fr 1.5fr;gap:10px}
+.col{display:grid;gap:8px;align-content:start}
+.m{padding:12px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;font-weight:700;cursor:pointer;text-align:left}
+.m.sm{font-weight:400;font-size:.93rem}
+.m[aria-pressed="true"]{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand) inset}
+.m.good{background:var(--okbg);border-color:var(--ok);cursor:default}
+.m.bad{background:var(--kobg);border-color:var(--ko)}
+</style>
+</head>
+<body>
+<main>
+<h1>🧪 Agents causants de la contaminació (UD1.2)</h1>
+<p class="sub">Cinc jocs per repassar la UD1.2. Després de cada resposta veuràs per què les altres opcions són incorrectes.</p>
+<nav role="tablist">
+<button role="tab" id="t1" aria-selected="true">1 · Quin tipus d'agent?</button>
+<button role="tab" id="t2" aria-selected="false">2 · Com s'evita?</button>
+<button role="tab" id="t3" aria-selected="false">3 · Relaciona</button>
+<button role="tab" id="t4" aria-selected="false">4 · Cadena epidemiològica</button>
+<button role="tab" id="t5" aria-selected="false">5 · Contaminació creuada</button>
+</nav>
+<section class="panel" id="app" aria-live="polite"></section>
+</main>
+<script>
+var app=document.getElementById('app');
+function end(s,n,again){var r=s/n;app.innerHTML='<div class="end"><div class="big">'+(r>.7?'🏅':'📚')+'</div><h2>'+s+' / '+n+'</h2><p>'+(r>.7?'Molt bé! Domines aquesta part de la unitat.':'Repassa el tema i torna-ho a provar.')+'</p><button class="next" id="rs">Torna a jugar</button></div>';document.getElementById('rs').onclick=again}
+function quiz(items,info,name){
+ var i=0,s=0;
+ (function go(){
+  if(i>=items.length){end(s,items.length,function(){i=0;s=0;go()});return}
+  var c=items[i],an=false;
+  app.innerHTML=(info?'<div class="info">'+info+'</div>':'')+'<div class="bar"><span>'+name+' '+(i+1)+' de '+items.length+'</span><span>Punts: '+s+'</span></div><div class="big">'+c.e+'</div><p class="q">'+c.t+'</p><div class="opts">'+c.o.map(function(o,k){return '<button data-k="'+k+'">'+o+'</button>'}).join('')+'</div><div class="fb" id="fb"></div>';
+  app.querySelectorAll('.opts button').forEach(function(b){b.onclick=function(){
+   if(an)return;an=true;var k=+b.dataset.k,ok=k===c.a;if(ok)s++;
+   app.querySelectorAll('.opts button').forEach(function(x,n){x.disabled=true;if(n===c.a){x.style.background='var(--okbg)';x.style.borderColor='var(--ok)'}else if(n===k){x.style.background='var(--kobg)';x.style.borderColor='var(--ko)'}});
+   var h='<div class="verdict">'+(ok?'✅ Correcte!':'❌ No exactament. La resposta és: '+c.o[c.a])+'</div>';
+   c.o.forEach(function(o,n){h+='<div class="'+(n===c.a?'good':(n===k?'bad':''))+'"><b>'+(n===c.a?'✅ ':'❌ ')+o+':</b> '+c.w[n]+'</div>'});
+   document.getElementById('fb').innerHTML=h+'<div><button class="next" id="nx">'+(i===items.length-1?'Veure resultat':'Següent')+'</button></div>';
+   document.getElementById('nx').onclick=function(){i++;go()};
+  }});
+ })();
+}
+/* generador: opcions fixes + descripció de cada opció per explicar els errors */
+function mk(e,t,opts,desc,a,why){return {e:e,t:t,o:opts,a:opts.indexOf(a),w:opts.map(function(x){return x===a?why:desc[x]})}}
+/* JOC 1 */
+var D1={'Físic':'Un agent físic és un cos estrany (cabells, vidre, terra...). Aquí no és el cas.','Químic':'Un agent químic és una substància tòxica present a l\'aliment. Aquí no és el cas.','Biològic':'Un agent biològic és un ésser viu (macro o microorganisme). Aquí no és el cas.'};
+var O1=['Físic','Químic','Biològic'];
+function a1(e,t,a,w){return mk(e,t,O1,D1,a,w)}
+var G1=[
+a1('💇','Un cabell a la sopa','Físic','És un cos estrany que cau per una mala higiene del personal.'),
+a1('🪟','Trossos de vidre d\'una bombeta trencada','Físic','Cos estrany que arriba per un accident o un descuit.'),
+a1('🥕','Terra a les verdures','Físic','És un cos estrany (i, a més, pot dur microorganismes).'),
+a1('📦','Restes de fusta de les caixes de fruita','Físic','Cos estrany que arriba amb la mercaderia.'),
+a1('🌱','Residus de fitosanitaris a la fruita','Químic','Substància tòxica abiòtica usada per prevenir malalties dels vegetals.'),
+a1('🐟','Mercuri en un peix','Químic','Contaminant mediambiental, agent químic abiòtic.'),
+a1('🍟','Acrilamida a les patates fregides','Químic','Compost tòxic del processament, es forma per sobre de 120 ºC.'),
+a1('🍼','Melamina a la llet en pols','Químic','Substància prohibida o no autoritzada (abiòtica).'),
+a1('🍄','Un bolet verinós','Químic','Tòxic natural: agent químic biòtic, produït per un ésser viu.'),
+a1('🍞','Pa amb floridura i micotoxines','Químic','Les micotoxines són agents químics biòtics: toxines dels fongs.'),
+a1('🐚','Biotoxines als musclos','Químic','Les biotoxines marines són agents químics biòtics, produïts per microalgues.'),
+a1('🪰','Mosques a la cuina','Biològic','Macroorganismes: es veuen a ull nu i intervenen en la transmissió.'),
+a1('🐀','Rosegadors al magatzem','Biològic','Macroorganismes que poden transmetre microorganismes.'),
+a1('🥚','Salmonella en un ou cru','Biològic','Microorganisme patogen (bacteri) causant d\'ETA.')];
+/* JOC 2 */
+var M=[['Cabells','💇','Cauen per mala higiene del personal','Gorra, xarxa o mocador que els cobreixi del tot'],
+['Objectes personals','💍','Anells, arracades, pírcings que es perden','Treure\'ls abans de manipular aliments'],
+['Ungles i ungles artificials','💅','Es trenquen o cauen','Ungles curtes i sense esmalt; artificials prohibides'],
+['Tiretes i trossos de guants','🩹','Es perden durant la manipulació','Fer-los servir d\'un color visible, com el blau'],
+['Pedres o terra','🥬','Arriben amb verdures, hortalisses i llegums','Rentar-los a consciència abans de produir'],
+['Restes de fusta','🪵','Arriben amb les caixes de fruita i verdura','Treure la mercaderia de les caixes i revisar-la'],
+['Restes no comestibles','🦴','Ossos, pinyols, espines, closques, petxines','Seguir el protocol i fer inspecció visual'],
+['Restes d\'embalatge','🧷','Plàstic, paper, grapes o cordes de l\'envàs','Retirar-les amb cura i comprovar que no en queden'],
+['Trossos de metalls','🔩','Fregalls, hams, perdigons, encenalls dels equips','Equips en bon estat i inspecció visual'],
+['Trossos de vidre','🪟','Es trenquen recipients, bombetes o fluorescents','Protegir els llums i evitar envasos de vidre'],
+['Insectes','🪲','Arriben amb la matèria primera o per falta de control','Pla de control de plagues, mosquiteres i revisió']];
+var G2=M.map(function(m,i){
+ var o=[null,null,null,null],p=i%4,ot=[(i+1)%11,(i+4)%11,(i+7)%11];o[p]=m[3];var q=0;
+ for(var k=0;k<4;k++){if(k!==p){o[k]=M[ot[q]][3];q++}}
+ return {e:m[1],t:'Quina és la mesura preventiva per a: '+m[0].toLowerCase()+'?',o:o,a:p,w:o.map(function(x,k){if(k===p)return 'Correcte. Arriba així: '+m[2].toLowerCase()+'.';var f=M.filter(function(y){return y[3]===x})[0];return 'Aquesta mesura serveix per a: '+f[0].toLowerCase()+', no per a '+m[0].toLowerCase()+'.'})};
+});
+/* JOC 3: relaciona */
+var R=[
+{n:'🧪 Tipus d\'agents químics (1)',p:[['Compostos polars','Producte de la degradació d\'olis i greixos en fregir'],['Residus farmacològics','Clembuterol o esteroides, per exemple'],['Residus fitosanitaris','S\'acumulen per l\'ús de pesticides'],['Contaminants ambientals','Metalls pesats i dioxines'],['Micotoxines','Poden venir de males pràctiques d\'emmagatzematge']]},
+{n:'🧪 Tipus d\'agents químics (2)',p:[['Substàncies prohibides','La melamina n\'és un exemple'],['Tòxics naturals','La solanina n\'és un exemple'],['Biotoxines marines','Les produeixen algunes microalgues'],['Acrilamida','Augmenta si s\'eleva la temperatura de cocció'],['Histamina','La pot causar una mala conservació del peix']]},
+{n:'📘 Definicions i sigles (1)',p:[['RASFF','Sistema d\'alerta ràpida per a aliments i pinsos de la UE'],['JECFA','Comitè Mixt FAO/OMS d\'Experts en Additius Alimentaris'],['Agent físic','Qualsevol cos estrany present a l\'aliment o la beguda'],['Agent químic','Substància tòxica present a l\'aliment'],['Agents abiòtics','No formen part dels éssers vius ni els produeixen']]},
+{n:'📘 Definicions i sigles (2)',p:[['Agents biòtics','Formen part dels éssers vius o els produeixen (toxines)'],['Cadena epidemiològica','Seqüència d\'esdeveniments que porta un microorganisme a causar una infecció'],['Contaminació creuada','Pas de microorganismes d\'un aliment contaminat a un altre'],['Macroorganismes','Es veuen a ull nu: insectes, rosegadors...'],['Microorganismes','No es veuen a simple vista: bacteris, virus, fongs, llevats, paràsits']]}];
+var L=null,dn=0,er=0;
+function show3(r){
+ var d=R[r],right=d.p.map(function(x,k){return k}).sort(function(){return Math.random()-.5});L=null;dn=0;er=0;
+ app.innerHTML='<div class="bar"><span>Ronda '+(r+1)+' de '+R.length+': '+d.n+'</span><span id="sc">Parelles: 0/'+d.p.length+' · Errors: 0</span></div><p class="q">Toca un terme i, després, la seva parella.</p><div class="two"><div class="col">'+d.p.map(function(x,k){return '<button class="m" data-s="l" data-k="'+k+'">'+x[0]+'</button>'}).join('')+'</div><div class="col">'+right.map(function(k){return '<button class="m sm" data-s="r" data-k="'+k+'">'+d.p[k][1]+'</button>'}).join('')+'</div></div><div class="fb" id="fb3"></div>';
+ var fb=document.getElementById('fb3'),sc=document.getElementById('sc');
+ app.querySelectorAll('.m').forEach(function(b){b.onclick=function(){
+  if(b.classList.contains('good'))return;var k=+b.dataset.k;
+  if(b.dataset.s==='l'){app.querySelectorAll('.m[data-s="l"]').forEach(function(x){x.setAttribute('aria-pressed','false')});L=k;b.setAttribute('aria-pressed','true');return}
+  if(L===null){fb.innerHTML='<div class="miss">Tria primer un terme de l\'esquerra.</div>';return}
+  var lb=app.querySelector('.m[data-s="l"][data-k="'+L+'"]');
+  if(k===L){lb.classList.add('good');b.classList.add('good');lb.setAttribute('aria-pressed','false');dn++;L=null;fb.innerHTML='<div class="good"><b>✅ Correcte:</b> '+d.p[k][0]+' → '+d.p[k][1]+'</div>'}
+  else{er++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad')},900);fb.innerHTML='<div class="bad"><b>❌ Incorrecte:</b> «'+d.p[L][0]+'» no correspon a aquesta definició. Aquesta definició pertany a «'+d.p[k][0]+'».</div>'}
+  sc.textContent='Parelles: '+dn+'/'+d.p.length+' · Errors: '+er;
+  if(dn===d.p.length){var last=r===R.length-1;fb.innerHTML+='<div class="verdict">🎉 Ronda completada amb '+er+' error(s).</div><div><button class="next" id="nx3">'+(last?'Torna a començar':'Ronda següent')+'</button></div>';document.getElementById('nx3').onclick=function(){show3(last?0:r+1)}}
+ }});
+}
+/* JOC 4: cadena epidemiològica */
+var O4=['Agent causal','Mecanisme de transmissió','Hoste'];
+var D4={'Agent causal':'L\'agent causal és el microorganisme patogen (al medi, en animals o en persones portadores). Aquí no és el cas.','Mecanisme de transmissió':'El mecanisme de transmissió és la via per arribar a l\'hoste; en cuina, l\'aliment. Aquí no és el cas.','Hoste':'L\'hoste és la persona que s\'infecta en rebre l\'agent. Aquí no és el cas.'};
+function a4(e,t,a,w){return mk(e,t,O4,D4,a,w)}
+var G4=[
+a4('🐀','Una rata portadora de Salmonella al magatzem','Agent causal','Els animals infectats són portadors de l\'agent patogen.'),
+a4('🍗','Un plat de pollastre contaminat que s\'arriba a servir','Mecanisme de transmissió','Aquí l\'aliment és la via per la qual el consumidor s\'encomana.'),
+a4('👵','Una persona gran que menja l\'aliment contaminat','Hoste','És qui s\'infecta; els majors són més susceptibles.'),
+a4('🧑‍🍳','Un cuiner infectat que manipula aliments','Agent causal','Les persones infectades són portadores de l\'agent.'),
+a4('🧳','Un turista que menja un plat en un país nou','Hoste','Els turistes són vulnerables: el seu sistema immunològic no està adaptat.'),
+a4('🥗','Una amanida contaminada pel contacte amb pollastre cru','Mecanisme de transmissió','L\'aliment és el mecanisme que porta el patogen fins a la persona.'),
+a4('💧','Aigua del medi que conté el microorganisme patogen','Agent causal','El patogen es pot trobar al medi: sòl, aire o aigua.'),
+a4('🤰','Una dona embarassada que menja l\'aliment contaminat','Hoste','L\'embaràs és un estat fisiològic que augmenta el risc.')];
+/* JOC 5: contaminació creuada */
+var O5=['Directa','Indirecta','No hi ha contaminació creuada'];
+var D5={'Directa':'Directa: l\'aliment sa toca directament l\'aliment contaminat. Aquí no és el cas.','Indirecta':'Indirecta: hi ha un pas intermedi (ganivet, taula, mans). Aquí no és el cas.','No hi ha contaminació creuada':'Aquí no hi ha contacte, ni directe ni per un estri, entre un aliment contaminat i un de sa.'};
+function a5(e,t,a,w){return mk(e,t,O5,D5,a,w)}
+var G5=[
+a5('🍗','Pollastre cru sense envasar al costat d\'un plat cuinat','Directa','L\'aliment sa toca o queda en contacte directe amb el contaminat.'),
+a5('🔪','Tallar pollastre contaminat i, amb el mateix ganivet sense desinfectar, tallar un enciam','Indirecta','El ganivet és el pas intermedi que transmet el patogen.'),
+a5('🪵','Fer servir la mateixa fusta per carn crua i fruita sense netejar-la','Indirecta','La fusta fa de pas intermedi entre els dos aliments.'),
+a5('🧊','Una amanida col·locada a la nevera sota carn crua que goteja','Directa','Els sucs de la carn arriben directament a l\'aliment sa.'),
+a5('📦','Carn crua en un envàs tancat i separada dels cuinats','No hi ha contaminació creuada','Estan separats i l\'envàs impedeix qualsevol contacte.'),
+a5('🧤','Tocar pollastre cru i, sense rentar-se les mans, preparar un pastís','Indirecta','Les mans actuen com a pas intermedi entre els dos aliments.')];
+var INFO1='Pensa: físic = cos estrany; químic = substància tòxica; biològic = ésser viu.';
+var INFO4='Cadena epidemiològica: agent causal → mecanisme de transmissió → hoste.';
+function tab(n){for(var m=1;m<=5;m++)document.getElementById('t'+m).setAttribute('aria-selected',m===n);
+ if(n===1)quiz(G1,INFO1,'Agent');else if(n===2)quiz(G2,'Mesures preventives dels agents físics.','Objecte');else if(n===3)show3(0);else if(n===4)quiz(G4,INFO4,'Situació');else quiz(G5,'Directa = contacte directe. Indirecta = amb un pas intermedi.','Situació')}
+for(var m=1;m<=5;m++)(function(m){document.getElementById('t'+m).onclick=function(){tab(m)}})(m);
+tab(1);
+</script>
+</body>
+</html>
