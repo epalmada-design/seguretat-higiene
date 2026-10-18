@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Etiquetatge dels aliments: el joc</title>
+<style>
+:root{--bg:#eef3f6;--card:#fff;--ink:#16303d;--mute:#5b7482;--line:#cbd9e1;--brand:#0e6e8c;--ok:#1b7f4b;--okbg:#dff3e7;--ko:#b3261e;--kobg:#fbe3e1;--paper:#fffdf5;--pink:#a3223a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1e26;--card:#182b36;--ink:#e6f0f5;--mute:#93aebb;--line:#2b4655;--brand:#4fc3e3;--ok:#5fd394;--okbg:#153a28;--ko:#ff8a80;--kobg:#42201e;--paper:#f6f2e4;--pink:#a3223a}}
+:root[data-theme="dark"]{--bg:#0f1e26;--card:#182b36;--ink:#e6f0f5;--mute:#93aebb;--line:#2b4655;--brand:#4fc3e3;--ok:#5fd394;--okbg:#153a28;--ko:#ff8a80;--kobg:#42201e;--paper:#f6f2e4;--pink:#a3223a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",Verdana,sans-serif;line-height:1.45}
+main{max-width:860px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.7rem;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 16px}
+nav{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+nav button{flex:1;min-width:150px;padding:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;font:inherit;font-weight:700;cursor:pointer}
+nav button[aria-selected="true"]{border-color:var(--brand);background:var(--brand);color:#fff}
+button:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.bar{display:flex;justify-content:space-between;color:var(--mute);font-size:.95rem;margin-bottom:8px}
+.big{font-size:5rem;text-align:center;line-height:1.1;margin:6px 0}
+.q{font-size:1.2rem;font-weight:700;text-align:center;margin:0 0 14px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.opts button{padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:1.02rem;font-weight:700;cursor:pointer}
+.opts button:disabled{cursor:default}
+.fb{margin-top:14px;display:grid;gap:8px}
+.fb div{padding:10px 12px;border-radius:10px;border-left:6px solid var(--line);background:var(--bg)}
+.fb .good{background:var(--okbg);border-color:var(--ok)}
+.fb .bad{background:var(--kobg);border-color:var(--ko)}
+.verdict{font-weight:700;font-size:1.1rem}
+.next{margin-top:14px;padding:12px 22px;border:0;border-radius:12px;background:var(--brand);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.info{background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:.93rem;color:var(--mute)}
+.end{text-align:center;padding:20px 0}
+.lab{background:var(--paper);color:#222;border:2px dashed #8a8570;border-radius:10px;padding:10px;display:grid;gap:8px;max-width:520px;margin:0 auto}
+.z{background:transparent;border:2px solid transparent;border-radius:8px;padding:8px;font:inherit;color:#222;text-align:left;cursor:pointer}
+.z:hover{border-color:var(--brand)}
+.z.good{background:#cdeedb;border-color:var(--ok)}
+.z.bad{background:#f8d3d0;border-color:var(--ko)}
+.z.locked{cursor:default}
+.z h3{margin:0;font-size:1.25rem;text-align:center}
+.z small{color:#555}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.oval{border:2px solid #222;border-radius:50%;text-align:center;font-size:.75rem;padding:8px 4px;margin:auto;width:110px;background:transparent}
+table{border-collapse:collapse;font-size:.8rem;width:100%}
+td{border-top:1px solid #999;padding:1px 4px}
+@media(max-width:480px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>🏷️ Etiquetatge dels aliments</h1>
+<p class="sub">Tres jocs per aprendre a llegir una etiqueta. Després de cada resposta veuràs per què les altres són incorrectes.</p>
+<nav role="tablist">
+<button role="tab" id="t1" aria-selected="true">1 · Etiqueta a la lupa</button>
+<button role="tab" id="t2" aria-selected="false">2 · Caducitat o preferent?</button>
+<button role="tab" id="t3" aria-selected="false">3 · Quin al·lèrgen amaga?</button>
+</nav>
+<section class="panel" id="app" aria-live="polite"></section>
+</main>
+<script>
+var app=document.getElementById('app');
+/* JOC 1 */
+var Z={
+den:['la denominació de venda, el nom del producte'],
+ing:['la llista d\'ingredients, de més a menys quantitat i amb els al·lèrgens destacats'],
+net:['la quantitat neta del producte'],
+data:['la data de durada mínima (consumir preferentment)'],
+cons:['les condicions de conservació'],
+emp:['la identificació de l\'empresa: nom i adreça de l\'operador'],
+lot:['el lot, que permet la traçabilitat'],
+reg:['el número de registre sanitari de l\'empresa'],
+nut:['la informació nutricional']};
+var P=[['den','Troba el nom amb què es ven el producte (denominació).'],['ing','Troba la llista d\'ingredients.'],['ing','Troba on s\'indiquen els al·lèrgens (surten destacats).'],['net','Troba quant pesa el producte (quantitat neta).'],['data','Troba fins quan el producte manté les seves qualitats.'],['cons','Troba com s\'ha de guardar el producte.'],['emp','Troba qui l\'ha elaborat i on localitzar-lo.'],['lot','Troba el codi que permet seguir el rastre d\'aquesta partida (traçabilitat).'],['reg','Troba el registre sanitari de l\'empresa.'],['nut','Troba els valors d\'energia, greixos i sucres.']];
+function lab(){return '<div class="lab">'+
+'<button class="z" data-z="den"><h3>Galetes de civada amb xocolata</h3></button>'+
+'<button class="z" data-z="ing"><b>Ingredients:</b> farina de <b>blat</b>, sucre, xocolata (amb <b>llet</b>), flocs de civada, oli de gira-sol, <b>ous</b>, sal.</button>'+
+'<div class="row"><button class="z" data-z="net">Pes net: 200 g</button><button class="z" data-z="data">Consumir preferentment abans de: 03/2027</button></div>'+
+'<div class="row"><button class="z" data-z="cons">Conserveu en lloc fresc i sec.</button><button class="z" data-z="lot">Lot: L2409</button></div>'+
+'<div class="row"><button class="z" data-z="emp">Elaborat per Dolços del Forn, S.L.<br><small>C/ del Forn 5, Girona</small></button><button class="z" data-z="reg"><div class="oval">ES<br>26.01234/B<br>CE</div></button></div>'+
+'<button class="z" data-z="nut"><table><tr><td><b>Per 100 g</b></td><td></td></tr><tr><td>Energia</td><td>480 kcal</td></tr><tr><td>Greixos</td><td>21 g</td></tr><tr><td>Sucres</td><td>24 g</td></tr><tr><td>Sal</td><td>0,6 g</td></tr></table></button></div>';}
+var i1=0,sc1=0,an=false;
+var NAMES={den:'Denominació',ing:'Ingredients',net:'Quantitat neta',data:'Data',cons:'Conservació',emp:'Empresa',lot:'Lot',reg:'Registre sanitari',nut:'Nutrició'};
+function show1(){
+ if(i1>=P.length){end(sc1,P.length,function(){i1=0;sc1=0;show1()});return}
+ an=false;var p=P[i1];
+ app.innerHTML='<div class="bar"><span>Pregunta '+(i1+1)+' de '+P.length+'</span><span>Punts: '+sc1+'</span></div><p class="q">'+p[1]+'</p>'+lab()+'<div class="fb" id="fb"></div>';
+ app.querySelectorAll('.z').forEach(function(b){b.onclick=function(){
+  if(an)return;an=true;var k=b.dataset.z,ok=k===p[0];if(ok)sc1++;
+  app.querySelectorAll('.z').forEach(function(x){x.classList.add('locked')});
+  app.querySelector('[data-z="'+p[0]+'"]').classList.add('good');if(!ok)b.classList.add('bad');
+  var h=ok?'<div class="good"><b>✅ Correcte!</b> Això és '+Z[k][0]+'.</div>':'<div class="bad"><b>❌ Incorrecte.</b> Has tocat «'+NAMES[k]+'»: això és '+Z[k][0]+'.</div><div class="good"><b>✅ Era «'+NAMES[p[0]]+'»:</b> '+Z[p[0]][0]+'.</div>';
+  document.getElementById('fb').innerHTML=h+'<div><button class="next" id="nx">'+(i1===P.length-1?'Veure resultat':'Següent')+'</button></div>';
+  document.getElementById('nx').onclick=function(){i1++;show1()};
+ }});
+}
+function end(s,n,again){var r=s/n;app.innerHTML='<div class="end"><div class="big">'+(r>.7?'🏅':'📚')+'</div><h2>'+s+' / '+n+'</h2><p>'+(r>.7?'Molt bé! Ja saps llegir una etiqueta.':'Repassa el tema i torna-ho a provar.')+'</p><button class="next" id="rs">Torna a jugar</button></div>';document.getElementById('rs').onclick=again}
+/* Motor de test per als jocs 2 i 3 */
+function quiz(items,info,name){
+ var i=0,s=0;
+ (function go(){
+  if(i>=items.length){end(s,items.length,function(){i=0;s=0;go()});return}
+  var c=items[i],an=false;
+  app.innerHTML=(info?'<div class="info">'+info+'</div>':'')+'<div class="bar"><span>'+name+' '+(i+1)+' de '+items.length+'</span><span>Punts: '+s+'</span></div><div class="big">'+c.e+'</div><p class="q">'+c.t+'</p><div class="opts">'+c.o.map(function(o,k){return '<button data-k="'+k+'">'+o+'</button>'}).join('')+'</div><div class="fb" id="fb"></div>';
+  app.querySelectorAll('.opts button').forEach(function(b){b.onclick=function(){
+   if(an)return;an=true;var k=+b.dataset.k,ok=k===c.a;if(ok)s++;
+   app.querySelectorAll('.opts button').forEach(function(x,n){x.disabled=true;if(n===c.a){x.style.background='var(--okbg)';x.style.borderColor='var(--ok)'}else if(n===k){x.style.background='var(--kobg)';x.style.borderColor='var(--ko)'}});
+   var h='<div class="verdict">'+(ok?'✅ Correcte!':'❌ No exactament. La resposta és: '+c.o[c.a])+'</div>';
+   c.o.forEach(function(o,n){h+='<div class="'+(n===c.a?'good':(n===k?'bad':''))+'"><b>'+(n===c.a?'✅ ':'❌ ')+o+':</b> '+c.w[n]+'</div>'});
+   document.getElementById('fb').innerHTML=h+'<div><button class="next" id="nx">'+(i===items.length-1?'Veure resultat':'Següent')+'</button></div>';
+   document.getElementById('nx').onclick=function(){i++;go()};
+  }});
+ })();
+}
+/* JOC 2 */
+var PF='Consumir preferentment',CA='Data de caducitat';
+var WP='Marca la qualitat: passada la data, el producte pot perdre gust o textura, però no s\'acostuma a convertir en perillós.',WC='S\'aplica a aliments molt peribles: passada la data poden ser un risc per a la salut i no s\'han de consumir.';
+function D(e,t,a,p,c){return {e:e,t:t,o:[PF,CA],a:a,w:[a===0?p:'No: '+c,a===1?c:'No: '+p]}}
+var G2=[
+D('🥛','Llet UHT sense obrir',0,'La llet UHT és estèril i dura mesos; la data és de qualitat.','És un producte poc perible mentre està tancat.'),
+D('🐔','Pollastre fresc envasat',1,'És un aliment molt perible, amb risc de microorganismes.','No és un producte estable que només perdi qualitat.'),
+D('🍝','Pasta seca',0,'És un producte sec i estable: només perd qualitat.','No és perible ni un risc microbiològic.'),
+D('🥩','Carn picada fresca',1,'Es contamina amb facilitat: passat el termini, és un risc.','No és un aliment estable: no es pot deixar passar la data.'),
+D('🥫','Conserva de tonyina tancada',0,'La conserva és estable durant molt de temps.','No és perible mentre l\'envàs està tancat.'),
+D('🍣','Sushi de peix cru envasat',1,'El peix cru és molt perible i pot causar infeccions.','No és un producte estable: la data és de seguretat.'),
+D('🍪','Galetes',0,'És un producte sec: la data indica fins quan es manté cruixent.','No és un risc per a la salut passada la data.'),
+D('🥗','Amanida preparada refrigerada',1,'Es menja sense cuinar i és perible: la data és de seguretat.','No és estable a temperatura de nevera durant molt de temps.'),
+D('🥚','Ous frescos',0,'Als ous s\'indica la data de consum preferent.','No s\'hi aplica caducitat, tot i que cal conservar-los correctament.'),
+D('🧀','Formatge fresc sense assecar',1,'Té molta humitat i és molt perible, per això caduca.','No és curat ni estable: la data és de seguretat.')];
+var INFO2='<b>Consumir preferentment</b> = qualitat. <b>Data de caducitat</b> (consumir abans de) = seguretat.';
+/* JOC 3 */
+var AL={Gluten:'cereals com el blat, l\'ordi o el sègol',Crustacis:'gambes, llagostins, escamarlans',Ous:'ous i derivats (maionesa, pasta...)',Peix:'peix i productes de peix',Cacauets:'cacauets i derivats',Soja:'soja i derivats',Llet:'llet i derivats (formatge, iogurt...)','Fruits de closca':'ametlles, avellanes i nous',Api:'api i derivats',Mostassa:'mostassa i derivats',Sèsam:'grans de sèsam i derivats (tahina)',Sulfits:'diòxid de sofre i sulfits (vi, fruita seca)',Tramussos:'tramussos i derivats','Mol·luscs':'musclos, calamars, cargols'};
+function A(e,t,a,why,o){return {e:e,t:t,o:o,a:o.indexOf(a),w:o.map(function(x){return x===a?why:'Aquest al·lèrgen són '+AL[x]+', però no és el que porta aquest plat.'})}}
+var G3=[
+A('🥚','Maionesa casolana','Ous','S\'elabora amb ou.',['Ous','Peix','Soja','Api']),
+A('🍝','Espagueti a la bolonyesa','Gluten','La pasta es fa amb blat.',['Gluten','Sèsam','Crustacis','Cacauets']),
+A('🦐','Arròs amb gambes','Crustacis','Les gambes són crustacis.',['Crustacis','Mol·luscs','Peix','Gluten']),
+A('🍷','Una copa de vi','Sulfits','El vi conté sulfits, que s\'han d\'indicar.',['Sulfits','Gluten','Api','Tramussos']),
+A('🧆','Hummus de cigrons amb tahina','Sèsam','La tahina es fa amb sèsam.',['Sèsam','Soja','Llet','Mostassa']),
+A('🧀','Formatge fresc amb mel','Llet','El formatge és un derivat de la llet.',['Llet','Ous','Soja','Peix']),
+A('🍬','Torró d\'ametlla','Fruits de closca','L\'ametlla és un fruit de closca. Els cacauets no ho són: són lleguminoses.',['Fruits de closca','Cacauets','Soja','Tramussos']),
+A('🥗','Vinagreta de mostassa','Mostassa','La mostassa és l\'ingredient principal de la salsa.',['Mostassa','Api','Sèsam','Sulfits']),
+A('🐚','Musclos al vapor','Mol·luscs','Els musclos són mol·luscs, no crustacis.',['Mol·luscs','Crustacis','Peix','Ous']),
+A('🥬','Brou de verdures amb api','Api','L\'api s\'ha d\'indicar encara que sigui poca quantitat.',['Api','Soja','Mostassa','Sulfits'])];
+var INFO3='També a restauració cal informar dels al·lèrgens dels aliments que es serveixen sense envasar (carta, cartell o etiqueta).';
+function tab(n){[1,2,3].forEach(function(m){document.getElementById('t'+m).setAttribute('aria-selected',m===n)});if(n===1){i1=0;sc1=0;show1()}else if(n===2)quiz(G2,INFO2,'Producte');else quiz(G3,INFO3,'Plat')}
+[1,2,3].forEach(function(m){document.getElementById('t'+m).onclick=function(){tab(m)}});
+show1();
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Resum visual: Seguretat i higiene alimentàries</title>
+<style>
+:root{--bg:#eef3f6;--card:#fff;--ink:#16303d;--mute:#5b7482;--line:#cbd9e1;--brand:#0e6e8c;--a:#b46a00;--abg:#fdf0d5;--c:#b3261e;--cbg:#fbe3e1;--d:#5b3fa8;--dbg:#ebe5fa;--g:#1b7f4b;--gbg:#dff3e7;--bbg:#dcf0f7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1e26;--card:#182b36;--ink:#e6f0f5;--mute:#93aebb;--line:#2b4655;--brand:#4fc3e3;--a:#f5c26b;--abg:#3d2f10;--c:#ff8a80;--cbg:#42201e;--d:#c3b0ff;--dbg:#2d2650;--g:#5fd394;--gbg:#153a28;--bbg:#12384a}}
+:root[data-theme="dark"]{--bg:#0f1e26;--card:#182b36;--ink:#e6f0f5;--mute:#93aebb;--line:#2b4655;--brand:#4fc3e3;--a:#f5c26b;--abg:#3d2f10;--c:#ff8a80;--cbg:#42201e;--d:#c3b0ff;--dbg:#2d2650;--g:#5fd394;--gbg:#153a28;--bbg:#12384a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",Verdana,sans-serif;line-height:1.45}
+main{max-width:960px;margin:0 auto;padding:22px 16px 48px}
+h1{font-size:1.9rem;margin:0}
+.sub{color:var(--mute);margin:4px 0 20px}
+h2{font-size:1.3rem;margin:28px 0 10px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.chain{display:flex;align-items:stretch;gap:6px;flex-wrap:wrap}
+.step{flex:1;min-width:110px;text-align:center;background:var(--bbg);border-radius:14px;padding:12px 6px}
+.step b{display:block;font-size:.95rem}
+.step .e{font-size:2.2rem}
+.arrow{align-self:center;font-size:1.6rem;color:var(--mute)}
+.note{margin:12px 0 0;color:var(--mute);font-size:.95rem}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.def{border-radius:14px;padding:14px;border:1px solid var(--line);background:var(--card)}
+.def .e{font-size:2rem}
+.def h3{margin:4px 0;font-size:1.05rem}
+.def p{margin:0;font-size:.95rem}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.t{border-radius:16px;padding:16px;border:3px solid}
+.t .e{font-size:3rem;line-height:1}
+.t h3{margin:6px 0}
+.t p{margin:0 0 8px}
+.t .ex{font-size:.92rem;padding:8px;border-radius:10px;background:var(--card)}
+.alt{border-color:var(--a);background:var(--abg)}
+.con{border-color:var(--c);background:var(--cbg)}
+.adu{border-color:var(--d);background:var(--dbg)}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.pil{background:var(--card);border-top:8px solid var(--brand);border-radius:12px;padding:14px;border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pil .e{font-size:2.2rem}
+.pil h3{margin:4px 0}
+.pil ul,.box ul{margin:6px 0 0;padding-left:18px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.vs{grid-template-columns:1fr}}
+.vs .t{border-color:var(--brand);background:var(--card)}
+.protocol{display:flex;flex-wrap:wrap;gap:10px}
+.p{flex:1;min-width:190px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+.p .n{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;align-items:center;justify-content:center}
+.p b{display:block;margin:6px 0 2px}
+.p span{font-size:.92rem}
+.orgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.org{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+.org b{font-size:1.3rem;display:block;color:var(--brand)}
+.org span{font-size:.88rem;color:var(--mute)}
+.risk{display:flex;gap:10px;flex-wrap:wrap;font-size:2.4rem}
+.risk div{flex:1;min-width:100px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 4px}
+.risk small{display:block;font-size:.85rem;color:var(--ink)}
+.cons{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.cons div{background:var(--cbg);border-radius:12px;padding:12px;font-size:.95rem}
+.btn{margin-top:24px;padding:12px 20px;border:0;border-radius:12px;background:var(--brand);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.btn:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+@media print{body{background:#fff}.btn{display:none}.box,.def,.t,.pil,.p,.org{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<h1>🍽️ Seguretat i higiene alimentàries</h1>
+<p class="sub">Resum visual de la unitat 1: manipulació dels aliments.</p>
+
+<h2>La cadena alimentària: hi ha de bones pràctiques a cada baula</h2>
+<div class="box">
+<div class="chain">
+<div class="step"><span class="e">🌾</span><b>Camp i granja</b></div><span class="arrow">➜</span>
+<div class="step"><span class="e">🚚</span><b>Transport</b></div><span class="arrow">➜</span>
+<div class="step"><span class="e">🏭</span><b>Indústria i emmagatzematge</b></div><span class="arrow">➜</span>
+<div class="step"><span class="e">👩‍🍳</span><b>Restauració</b></div><span class="arrow">➜</span>
+<div class="step"><span class="e">🧑</span><b>Consumidor</b></div>
+</div>
+<p class="note">🔎 <b>Traçabilitat:</b> poder trobar i seguir el rastre de l'aliment per totes les etapes, del principi al consumidor final. Si hi ha un risc, es gestiona més ràpid.</p>
+</div>
+
+<h2>Conceptes clau</h2>
+<div class="defs">
+<div class="def"><span class="e">🛡️</span><h3>Seguretat alimentària</h3><p>Accés a aliments <b>innocus, nutritius i en quantitat suficient</b>.</p></div>
+<div class="def"><span class="e">🧼</span><h3>Higiene alimentària</h3><p>Condicions i mesures perquè l'aliment sigui <b>innocu i comestible</b> i no perdi valor nutritiu en cap fase.</p></div>
+<div class="def"><span class="e">✅</span><h3>Bones pràctiques</h3><p>Actuacions correctes en el treball per garantir qualitat i innocuïtat. Han de ser un <b>hàbit</b>.</p></div>
+<div class="def"><span class="e">👃</span><h3>Característiques organolèptiques</h3><p>Es perceben amb els sentits: <b>gust, textura, olor i color</b>.</p></div>
+</div>
+<div class="box" style="margin-top:12px"><b>On s'apliquen les bones pràctiques:</b> 🧍 higiene personal · 🥕 manipulació · 🧽 neteja i desinfecció · 🥜 al·lergògens · 💧 recursos · 🗑️ residus.</div>
+
+<h2>Aliments insalubres: alterat, contaminat o adulterat</h2>
+<div class="three">
+<div class="t alt"><span class="e">🍌</span><h3>Alterat</h3><p>Ha canviat les característiques organolèptiques, la composició o el valor nutritiu. No sempre és perillós.</p><div class="ex">Galeta enrancida, plàtan marró i tou.</div></div>
+<div class="t con"><span class="e">🦠</span><h3>Contaminat</h3><p>Ha incorporat un agent estrany (químic, físic o biològic). Pot causar malalties.</p><div class="ex">Maionesa amb Salmonella, vidre a l'amanida.</div></div>
+<div class="t adu"><span class="e">🎭</span><h3>Adulterat</h3><p>S'hi ha afegit o tret una substància a propòsit, amb finalitat fraudulenta.</p><div class="ex">Llet amb aigua, tonyina amb suc de remolatxa.</div></div>
+</div>
+
+<h2>Malalties de transmissió alimentària (ETA)</h2>
+<div class="vs">
+<div class="t"><span class="e">🧫</span><h3>Infecció</h3><p>Causada per <b>microorganismes vius</b>: bacteri (Salmonella), virus (rotavirus) o paràsit (anisakis). Hi ha un període d'incubació i apareixen febre, diarrea i nàusees.</p></div>
+<div class="t"><span class="e">☠️</span><h3>Intoxicació</h3><p>Causada per <b>toxines</b> o substàncies tòxiques (neteja, fitosanitaris, toxines de bacteris o fongs). Apareix a les <b>poques hores</b>.</p></div>
+</div>
+<h3 style="margin:16px 0 8px">Població de risc</h3>
+<div class="risk"><div>🤰<small>Embarassades</small></div><div>🧳<small>Turistes</small></div><div>👵<small>Persones grans</small></div><div>👶<small>Nens i nenes</small></div><div>🤒<small>Persones malaltes</small></div></div>
+
+<h2>Brot d'origen alimentari (BOA)</h2>
+<div class="box"><b>Dues o més persones</b> amb els mateixos símptomes després de menjar els mateixos aliments o begudes contaminats. La primera acció és <b>informar l'Autoritat Sanitària</b>.</div>
+<div class="protocol" style="margin-top:12px">
+<div class="p"><span class="n">1</span><b>Informar el personal</b><span>Perquè col·labori i doni tota la informació.</span></div>
+<div class="p"><span class="n">2</span><b>Recollir informació</b><span>Exposats, manipuladors, instal·lacions i registres (temperatures).</span></div>
+<div class="p"><span class="n">3</span><b>Retirar el producte</b><span>Es retira del mercat i s'analitza l'agent causant.</span></div>
+<div class="p"><span class="n">4</span><b>Atendre el públic</b><span>Contacte amb afectats, sense difondre dades abans de l'informe oficial.</span></div>
+</div>
+<h3 style="margin:16px 0 8px">Si no es compleixen les bones pràctiques</h3>
+<div class="cons"><div>🔒 Tancament del negoci</div><div>⚖️ Multes i costos legals</div><div>📉 Pèrdua de reputació</div><div>💸 Devolucions i indemnitzacions</div></div>
+
+<h2>Normativa i inspeccions</h2>
+<div class="orgs">
+<div class="org"><b>FAO + OMS</b><span>Codex alimentarius</span></div>
+<div class="org"><b>Reglament (CE) 852/2004</b><span>Parlament Europeu</span></div>
+<div class="org"><b>AESAN</b><span>Agència Espanyola de Consum, Seguretat Alimentària i Nutrició</span></div>
+<div class="org"><b>ACSA</b><span>Agència Catalana de Seguretat Alimentària</span></div>
+</div>
+<p class="note">📛 <b>Registre sanitari:</b> totes les empreses alimentàries han d'estar-hi inscrites i ha de constar a l'etiqueta.</p>
+<h3 style="margin:16px 0 8px">Les inspeccions de sanitat valoren tres pilars</h3>
+<div class="pillars">
+<div class="pil"><span class="e">🏢</span><h3>Infraestructura</h3><ul><li>Parets, sostres i terra</li><li>Equips de fred a la temperatura adequada</li><li>Contenidors amb tapa i pedal</li></ul></div>
+<div class="pil"><span class="e">🧑‍🍳</span><h3>Bones pràctiques de manipulació</h3><ul><li>Ordre i neteja</li><li>Aliments etiquetats amb nom i data</li><li>Temperatura idònia</li></ul></div>
+<div class="pil"><span class="e">📋</span><h3>Sistemes d'autocontrol</h3><ul><li>Pla de formació</li><li>Pla d'al·lergògens</li><li>Plagues, neteja, proveïdors i residus</li></ul></div>
+</div>
+<button class="btn" onclick="window.print()">🖨️ Imprimeix o desa com a PDF</button>
+</main>
+</body>
+</html>
