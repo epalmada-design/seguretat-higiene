@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quiz de repàs: UD1.1, UD1.2 i UD5.1</title>
+<style>
+:root{--bg:#eef1f7;--card:#fff;--ink:#1b2430;--mute:#5a6678;--line:#cfd6e2;--brand:#46178f;--ok:#1b7f4b;--okbg:#dff3e7;--ko:#b3261e;--kobg:#fbe3e1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171327;--card:#241d3b;--ink:#eee9fb;--mute:#aaa3c4;--line:#3a3158;--brand:#a98bf0;--ok:#5fd394;--okbg:#153a28;--ko:#ff8a80;--kobg:#42201e}}
+:root[data-theme="dark"]{--bg:#171327;--card:#241d3b;--ink:#eee9fb;--mute:#aaa3c4;--line:#3a3158;--brand:#a98bf0;--ok:#5fd394;--okbg:#153a28;--ko:#ff8a80;--kobg:#42201e}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",Verdana,sans-serif;line-height:1.4}
+main{max-width:920px;margin:0 auto;padding:18px 14px 40px}
+h1{font-size:1.7rem;margin:0 0 4px;text-align:center}
+.sub{color:var(--mute);margin:0 0 16px;text-align:center}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+fieldset{border:1px solid var(--line);border-radius:12px;margin:0 0 14px;padding:10px 14px}
+legend{font-weight:700;padding:0 6px}
+label{display:inline-flex;align-items:center;gap:6px;margin:4px 14px 4px 0;cursor:pointer}
+select{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.btn{padding:14px 26px;border:0;border-radius:12px;background:var(--brand);color:#fff;font:inherit;font-weight:700;font-size:1.05rem;cursor:pointer}
+.btn.sec{background:var(--mute)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--mute);font-size:.95rem;margin-bottom:8px}
+.timer{height:14px;background:var(--line);border-radius:8px;overflow:hidden;margin-bottom:6px}
+.timer i{display:block;height:100%;width:100%;background:var(--brand);transition:width .1s linear}
+.tnum{text-align:center;font-weight:700;font-size:1.3rem;margin-bottom:8px}
+.q{font-size:1.35rem;font-weight:700;text-align:center;margin:8px 0 16px;min-height:3.2rem}
+.ans{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.ans{grid-template-columns:1fr}}
+.a{display:flex;align-items:center;gap:10px;min-height:72px;padding:12px 14px;border:3px solid transparent;border-radius:12px;color:#fff;font:inherit;font-weight:700;font-size:1.05rem;text-align:left;cursor:pointer}
+.a span.s{font-size:1.5rem;line-height:1}
+.c0{background:#c4162f}.c1{background:#1368ce}.c2{background:#8f6400}.c3{background:#1f7a09}
+.a:disabled{cursor:default}
+.a.dim{opacity:.35}
+.a.right{border-color:var(--ok);box-shadow:0 0 0 4px var(--ok)}
+.a.wrong{border-color:var(--ko);box-shadow:0 0 0 4px var(--ko)}
+.fb{margin-top:14px;padding:12px;border-radius:12px;background:var(--bg);border-left:6px solid var(--line)}
+.fb.good{background:var(--okbg);border-color:var(--ok)}.fb.bad{background:var(--kobg);border-color:var(--ko)}
+.pts{font-weight:700;font-size:1.15rem}
+.rank{display:grid;gap:8px;margin:12px 0}
+.rank div{display:flex;justify-content:space-between;padding:10px 14px;border-radius:10px;background:var(--bg);font-weight:700}
+.rank div:first-child{background:var(--brand);color:#fff;font-size:1.15rem}
+.rev{display:grid;gap:8px;margin-top:10px}
+.rev div{padding:10px 12px;border-radius:10px;background:var(--kobg);border-left:6px solid var(--ko)}
+.center{text-align:center}
+</style>
+</head>
+<body>
+<main>
+<h1>🎮 Quiz de repàs</h1>
+<p class="sub">Respon abans que s'acabi el temps: com més ràpid, més punts. Ratxa d'encerts = punts extra.</p>
+<section class="panel" id="app" aria-live="polite"></section>
+</main>
+<script>
+var D=[{"u": "UD1.1", "q": "Una galeta que s'ha enrancit per la humitat és un aliment...", "o": ["Alterat", "Contaminat", "Adulterat", "Innocu"], "a": 0, "t": 20, "e": "Ha canviat de sabor i olor per la humitat, però no hi ha cap agent estrany ni frau.", "f": false}, {"u": "UD1.1", "q": "Una maionesa amb Salmonella, sense olor ni gust estranys, és un aliment...", "o": ["Alterat", "Contaminat", "Adulterat", "Caducat"], "a": 1, "t": 20, "e": "Té un agent biològic (Salmonella) encara que sembli normal.", "f": false}, {"u": "UD1.1", "q": "Barrejar llet amb aigua per vendre'n més quantitat és un aliment...", "o": ["Contaminat", "Alterat", "Adulterat", "Caducat"], "a": 2, "t": 20, "e": "Es modifica a propòsit amb finalitat fraudulenta, per guanyar més.", "f": false}, {"u": "UD1.1", "q": "Segons la seguretat alimentària, els aliments han de ser...", "o": ["Envasats i etiquetats", "Barats i de proximitat", "Frescos i ecològics", "Innocus, nutritius i en quantitat suficient"], "a": 3, "t": 30, "e": "Seguretat alimentària: aliments innocus, nutritius i en quantitat suficient.", "f": false}, {"u": "UD1.1", "q": "Què és la traçabilitat?", "o": ["Poder seguir el rastre de l'aliment per tota la cadena", "La data de caducitat d'un aliment", "El registre sanitari d'una empresa", "La temperatura de conservació"], "a": 0, "t": 30, "e": "Permet seguir el rastre de l'aliment per totes les etapes i gestionar el risc més ràpid.", "f": false}, {"u": "UD1.1", "q": "Quins són els tres punts clau d'una inspecció de sanitat?", "o": ["Preu, qualitat i servei", "Infraestructura, bones pràctiques i autocontrol", "Cuina, sala i magatzem", "Personal, clients i proveïdors"], "a": 1, "t": 30, "e": "Les inspeccions valoren infraestructura, bones pràctiques i autocontrol.", "f": false}, {"u": "UD1.1", "q": "Una infecció alimentària està causada per...", "o": ["Toxines presents a l'aliment", "Productes de neteja", "Microorganismes vius (bacteris, virus, paràsits)", "Un canvi de color"], "a": 2, "t": 30, "e": "La infecció la causen microorganismes vius; les toxines causen intoxicació.", "f": false}, {"u": "UD1.1", "q": "Els símptomes d'una intoxicació alimentària apareixen...", "o": ["Mai abans de 48 hores", "Al cap d'una setmana", "Només si l'aliment és cru", "A les poques hores de la ingesta"], "a": 3, "t": 20, "e": "Les toxines actuen ràpid: els símptomes apareixen a les poques hores.", "f": false}, {"u": "UD1.1", "q": "Què és un brot d'origen alimentari (BOA)?", "o": ["2 o més persones amb els mateixos símptomes pel mateix aliment", "Un aliment caducat", "Una persona amb una al·lèrgia", "Una inspecció de sanitat"], "a": 0, "t": 30, "e": "Un brot són dues o més persones amb els mateixos símptomes pel mateix aliment.", "f": false}, {"u": "UD1.1", "q": "Davant la sospita d'un brot, la primera acció és...", "o": ["Retirar tots els aliments", "Informar l'Autoritat Sanitària", "Tancar el local", "Fer una nota de premsa"], "a": 1, "t": 20, "e": "La primera acció és informar l'Autoritat Sanitària.", "f": false}, {"u": "UD1.1", "q": "Quin d'aquests col·lectius NO és població de risc?", "o": ["Dones embarassades", "Nens i nenes", "Adults joves i sans", "Persones grans"], "a": 2, "t": 20, "e": "Embarassades, nens, persones grans, turistes i malaltes són població de risc.", "f": false}, {"u": "UD1.1", "q": "Quina data indica seguretat i no es pot consumir passada?", "o": ["Consumir preferentment", "Data de lot", "Data d'elaboració", "Data de caducitat"], "a": 3, "t": 20, "e": "La data de caducitat indica seguretat; el consum preferent només indica qualitat.", "f": false}, {"u": "UD1.2", "q": "Un cabell trobat a la sopa és un agent...", "o": ["Físic", "Químic", "Biològic", "Biòtic"], "a": 0, "t": 20, "e": "Un cabell és un cos estrany: agent físic.", "f": false}, {"u": "UD1.2", "q": "Els residus de fitosanitaris a la fruita són un agent...", "o": ["Físic", "Químic abiòtic", "Biològic", "Químic biòtic"], "a": 1, "t": 30, "e": "Els fitosanitaris són substàncies químiques que no formen part dels éssers vius: abiòtics.", "f": false}, {"u": "UD1.2", "q": "Les micotoxines (toxines dels fongs) són agents químics...", "o": ["Abiòtics", "Físics", "Biòtics", "Mediambientals"], "a": 2, "t": 20, "e": "Les micotoxines les produeixen els fongs (éssers vius): biòtics.", "f": false}, {"u": "UD1.2", "q": "A partir de quina temperatura es forma l'acrilamida en aliments rics en midó?", "o": ["60 ºC", "90 ºC", "120 ºC", "200 ºC"], "a": 2, "t": 20, "e": "L'acrilamida es forma per sobre de 120 ºC en aliments rics en midó.", "f": true}, {"u": "UD1.2", "q": "Quin és el màxim de compostos polars permès a l'oli de fregir?", "o": ["5 %", "15 %", "25 %", "50 %"], "a": 2, "t": 20, "e": "El màxim de compostos polars a l'oli de fregir és el 25 %.", "f": true}, {"u": "UD1.2", "q": "Quin d'aquests és un contaminant mediambiental?", "o": ["Acrilamida", "Histamina", "Bisfenol-A", "Mercuri"], "a": 3, "t": 20, "e": "El mercuri és un contaminant mediambiental; l'acrilamida ve del processament i el bisfenol-A, de l'envàs.", "f": false}, {"u": "UD1.2", "q": "Quin és l'ordre de la cadena epidemiològica?", "o": ["Agent causal, mecanisme de transmissió, hoste", "Mecanisme, hoste, agent causal", "Hoste, agent causal, mecanisme", "Agent causal, hoste, mecanisme"], "a": 0, "t": 30, "e": "L'ordre és agent causal, mecanisme de transmissió i hoste.", "f": false}, {"u": "UD1.2", "q": "Tallar pollastre contaminat i després enciam amb el mateix ganivet és...", "o": ["Contaminació creuada directa", "Contaminació creuada indirecta", "Una neteja correcta", "Una intoxicació"], "a": 1, "t": 30, "e": "El ganivet és un pas intermedi: contaminació creuada indirecta.", "f": false}, {"u": "UD1.2", "q": "Un cuiner infectat que manipula aliments és, a la cadena epidemiològica...", "o": ["L'hoste", "El mecanisme de transmissió", "L'agent causal (portador)", "Cap baula"], "a": 2, "t": 30, "e": "Les persones infectades són portadores de l'agent causal.", "f": false}, {"u": "UD1.2", "q": "Què és el RASFF?", "o": ["Un tipus de bacteri", "Una agència catalana", "Un additiu alimentari", "Sistema d'alerta ràpida per a aliments i pinsos de la UE"], "a": 3, "t": 30, "e": "RASFF: sistema d'alerta ràpida per a aliments i pinsos de la Unió Europea.", "f": false}, {"u": "UD1.2", "q": "La histamina apareix sobretot en...", "o": ["Peix mal conservat", "Arròs", "Verdura crua", "Llegums"], "a": 0, "t": 20, "e": "Els bacteris formen histamina en peix mal conservat, com la tonyina.", "f": false}, {"u": "UD1.2", "q": "Què cal fer amb un pa que té floridura?", "o": ["Treure només la part afectada", "Rebutjar-lo sencer", "Escalfar-lo al forn", "Congelar-lo"], "a": 1, "t": 20, "e": "Les micotoxines poden haver envaït tot l'aliment: cal rebutjar-lo sencer.", "f": false}, {"u": "UD5.1", "q": "Quin procés elimina la brutícia (matèria orgànica i inorgànica)?", "o": ["Esterilització", "Desinfecció", "Neteja", "Desinsectació"], "a": 2, "t": 20, "e": "La neteja elimina la brutícia; la desinfecció redueix els microorganismes.", "f": false}, {"u": "UD5.1", "q": "Quin procés elimina tota forma de vida, fins i tot les espores?", "o": ["Neteja", "Desinfecció", "Higienització", "Esterilització"], "a": 3, "t": 20, "e": "L'esterilització elimina tota forma de vida, espores incloses.", "f": false}, {"u": "UD5.1", "q": "El lleixiu s'ha d'utilitzar sempre amb aigua...", "o": ["Freda", "Calenta", "Bullent", "Tèbia a 60 ºC"], "a": 0, "t": 20, "e": "La calor desactiva el clor: el lleixiu s'usa amb aigua freda.", "f": false}, {"u": "UD5.1", "q": "El lleixiu s'ha d'aplicar sobre superfícies...", "o": ["Plenes de greix", "Ja netes", "Plenes de restes", "Mullades de detergent"], "a": 1, "t": 20, "e": "La matèria orgànica inactiva el lleixiu: va sobre superfícies netes.", "f": false}, {"u": "UD5.1", "q": "Quin producte és un àcid i elimina la calç i la brutícia del forn?", "o": ["Desgreixador", "Detergent", "Desincrustant", "Amoni quaternari"], "a": 2, "t": 20, "e": "Els desincrustants són àcids (pH 2-4): eliminen calç i brutícia del forn.", "f": false}, {"u": "UD5.1", "q": "Per al greix de la campana extractora, el producte adequat és un...", "o": ["Detergent neutre", "Desincrustant àcid", "Desinfectant d'ozó", "Desgreixador alcalí fort"], "a": 3, "t": 30, "e": "Els desgreixadors són alcalins forts (pH 12-14) i dissolen el greix orgànic.", "f": false}, {"u": "UD5.1", "q": "Quina és la temperatura màxima per diluir productes amb aigua?", "o": ["30 ºC", "45 ºC", "60 ºC", "90 ºC"], "a": 2, "t": 20, "e": "La dilució amb aigua no ha de passar de 60 ºC.", "f": true}, {"u": "UD5.1", "q": "Quin material NO s'ha d'usar per netejar?", "o": ["Draps de cotó", "Paper d'un sol ús", "Esponja d'inox", "Microfibra"], "a": 0, "t": 20, "e": "Els draps de cotó no s'usen per netejar: microfibra o paper d'un sol ús.", "f": false}, {"u": "UD5.1", "q": "A l'hora de netejar, què es neteja l'últim?", "o": ["Les parets", "El terra", "Els equipaments", "Les superfícies de treball"], "a": 1, "t": 20, "e": "El terra es neteja l'últim, perquè hi cauen les restes de la resta.", "f": false}, {"u": "UD5.1", "q": "Quin control de verificació del Pla de neteja és objectiu?", "o": ["Control visual", "Impressió del cuiner", "Anàlisi microbiològica", "Revisar l'olor"], "a": 2, "t": 20, "e": "L'anàlisi microbiològica és un control objectiu fet en laboratori.", "f": false}, {"u": "UD5.1", "q": "Quin és el primer pas per netejar una cambra frigorífica?", "o": ["Passar-hi aigua a pressió", "Rentar l'exterior", "Netejar les gomes", "Desconnectar-la del corrent"], "a": 3, "t": 30, "e": "Cal desconnectar la cambra del corrent i passar el gènere a una altra cambra.", "f": false}, {"u": "UD5.1", "q": "Els tractaments químics contra plagues s'apliquen...", "o": ["Només si els altres mètodes no han funcionat", "Sempre, com a primera mesura", "Els pot fer qualsevol persona", "Mai"], "a": 0, "t": 30, "e": "Els químics només s'usen si la resta de mètodes no ha funcionat, i els aplica una empresa especialitzada.", "f": false}];
+var SH=['▲','◆','●','■'];
+var app=document.getElementById('app'),G,TM,T0;
+function shuf(a){return a.slice().sort(function(){return Math.random()-.5})}
+function setup(){
+ app.innerHTML='<fieldset><legend>Unitats</legend><label><input type="checkbox" name="u" value="UD1.1" checked> UD1.1 Seguretat i higiene</label><label><input type="checkbox" name="u" value="UD1.2" checked> UD1.2 Agents de contaminació</label><label><input type="checkbox" name="u" value="UD5.1" checked> UD5.1 Neteja i manteniment</label></fieldset>'+
+ '<fieldset><legend>Preguntes</legend><label><select id="n"><option value="10">10 preguntes</option><option value="20">20 preguntes</option><option value="99" selected>Totes les de les unitats triades</option></select></label></fieldset>'+
+ '<fieldset><legend>Mode de joc</legend><label><input type="radio" name="m" value="1" checked> Individual</label><label><input type="radio" name="m" value="2"> Per equips (per torns)</label> <label id="tl" hidden>Equips: <select id="nt"><option>2</option><option>3</option><option>4</option></select></label></fieldset>'+
+ '<div class="center"><button class="btn" id="go">▶ Comença</button></div>';
+ var rs=app.querySelectorAll('input[name=m]');rs.forEach(function(r){r.onchange=function(){document.getElementById('tl').hidden=!(document.querySelector('input[name=m]:checked').value==='2')}});
+ document.getElementById('go').onclick=start;
+}
+function start(){
+ var us=[].map.call(document.querySelectorAll('input[name=u]:checked'),function(x){return x.value});
+ if(!us.length){alert('Tria almenys una unitat.');return}
+ var n=+document.getElementById('n').value,mode=document.querySelector('input[name=m]:checked').value,nt=+document.getElementById('nt').value;
+ var deck=shuf(D.filter(function(q){return us.indexOf(q.u)>=0})).slice(0,n).map(function(q){
+  var idx=q.o.map(function(x,i){return i});if(!q.f)idx=shuf(idx);
+  return {q:q.q,o:idx.map(function(i){return q.o[i]}),a:idx.indexOf(q.a),t:q.t,e:q.e,u:q.u};});
+ var pl=mode==='2'?Array.apply(null,Array(nt)).map(function(_,i){return {n:'Equip '+(i+1),s:0,st:0,ok:0}}):[{n:'Tu',s:0,st:0,ok:0}];
+ G={deck:deck,i:0,pl:pl,team:mode==='2',fails:[]};showQ();
+}
+function showQ(){
+ if(G.i>=G.deck.length){final();return}
+ var q=G.deck[G.i],p=G.pl[G.i%G.pl.length];G.done=false;
+ app.innerHTML='<div class="top"><span>Pregunta '+(G.i+1)+' de '+G.deck.length+' · '+q.u+'</span><span>'+(G.team?'Torn: <b>'+p.n+'</b> · ':'')+'Punts: <b id="sc">'+p.s+'</b>'+(p.st>1?' · 🔥 ratxa '+p.st:'')+'</span></div><div class="timer"><i id="tb"></i></div><div class="tnum" id="tn">'+q.t+'</div><p class="q">'+q.q+'</p><div class="ans">'+q.o.map(function(o,k){return '<button class="a c'+k+'" data-k="'+k+'"><span class="s" aria-hidden="true">'+SH[k]+'</span><span>'+o+'</span></button>'}).join('')+'</div><div id="fb"></div>';
+ app.querySelectorAll('.a').forEach(function(b){b.onclick=function(){answer(+b.dataset.k)}});
+ T0=Date.now();clearInterval(TM);
+ TM=setInterval(function(){var el=(Date.now()-T0)/1000,left=Math.max(0,q.t-el);document.getElementById('tb').style.width=(100*left/q.t)+'%';document.getElementById('tn').textContent=Math.ceil(left);if(left<=0)answer(-1)},100);
+}
+function answer(k){
+ if(G.done)return;G.done=true;clearInterval(TM);
+ var q=G.deck[G.i],p=G.pl[G.i%G.pl.length],el=Math.min(q.t,(Date.now()-T0)/1000),ok=k===q.a,pts=0;
+ if(ok){p.st++;pts=Math.round(1000*(1-(el/q.t)/2))+Math.min(p.st-1,5)*100;p.s+=pts;p.ok++}else{p.st=0;G.fails.push(q)}
+ app.querySelectorAll('.a').forEach(function(b,n){b.disabled=true;if(n===q.a)b.classList.add('right');else if(n===k)b.classList.add('wrong');else b.classList.add('dim')});
+ document.getElementById('sc').textContent=p.s;
+ var msg=k<0?'⏰ S\'ha acabat el temps.':ok?'✅ Correcte!':'❌ Incorrecte.';
+ document.getElementById('fb').innerHTML='<div class="fb '+(ok?'good':'bad')+'"><div class="pts">'+msg+(ok?' +'+pts+' punts':'')+'</div><div>La resposta correcta és: <b>'+q.o[q.a]+'</b>.</div><div>'+q.e+'</div></div><div class="center"><button class="btn" id="nx" style="margin-top:12px">'+(G.i===G.deck.length-1?'Veure resultats':'Següent ▶')+'</button></div>';
+ document.getElementById('nx').onclick=function(){G.i++;showQ()};document.getElementById('nx').focus();
+}
+function final(){
+ var r=G.pl.slice().sort(function(a,b){return b.s-a.s}),tot=G.deck.length,h='<h2 class="center">🏆 Resultats</h2><div class="rank">'+r.map(function(p,i){return '<div><span>'+(i+1)+'. '+p.n+'</span><span>'+p.s+' punts · '+p.ok+' encerts</span></div>'}).join('')+'</div>';
+ if(G.fails.length)h+='<h3>Per repassar ('+G.fails.length+')</h3><div class="rev">'+G.fails.map(function(q){return '<div><b>'+q.q+'</b><br>Resposta: '+q.o[q.a]+'. '+q.e+'</div>'}).join('')+'</div>';
+ else h+='<p class="center">🎉 Cap error! Impecable.</p>';
+ app.innerHTML=h+'<div class="center"><button class="btn" id="again" style="margin-top:14px">↻ Torna a jugar</button></div>';
+ document.getElementById('again').onclick=setup;
+}
+document.addEventListener('keydown',function(e){if(!G||G.i>=G.deck.length)return;if(!G.done&&e.key>='1'&&e.key<='4'){answer(+e.key-1)}});
+setup();
+</script>
+</body>
+</html>
