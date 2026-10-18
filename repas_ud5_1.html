@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Repàs UD5.1: Neteja, desinfecció i manteniment</title>
+<style>
+:root{--bg:#eef3f6;--card:#fff;--ink:#16303d;--mute:#5b7482;--line:#cbd9e1;--brand:#0e6e8c;--ok:#1b7f4b;--okbg:#dff3e7;--ko:#b3261e;--kobg:#fbe3e1;--warn:#9a5b00;--warnbg:#fdf0d5;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1e26;--card:#182b36;--ink:#e6f0f5;--mute:#93aebb;--line:#2b4655;--brand:#4fc3e3;--ok:#5fd394;--okbg:#153a28;--ko:#ff8a80;--kobg:#42201e;--warn:#f5c26b;--warnbg:#3d2f10}}
+:root[data-theme="dark"]{--bg:#0f1e26;--card:#182b36;--ink:#e6f0f5;--mute:#93aebb;--line:#2b4655;--brand:#4fc3e3;--ok:#5fd394;--okbg:#153a28;--ko:#ff8a80;--kobg:#42201e;--warn:#f5c26b;--warnbg:#3d2f10}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",Verdana,sans-serif;line-height:1.45}
+main{max-width:900px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.6rem;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 16px}
+nav{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+nav button{flex:1;min-width:130px;padding:10px 8px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;font:inherit;font-weight:700;cursor:pointer}
+nav button[aria-selected="true"]{border-color:var(--brand);background:var(--brand);color:#fff}
+button:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.bar{display:flex;justify-content:space-between;color:var(--mute);font-size:.95rem;margin-bottom:8px;gap:8px}
+.big{font-size:5rem;text-align:center;line-height:1.1;margin:6px 0}
+.q{font-size:1.2rem;font-weight:700;text-align:center;margin:0 0 14px}
+.info{background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:.93rem;color:var(--mute)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.opts button{padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:1rem;font-weight:700;cursor:pointer}
+.opts button:disabled{cursor:default}
+.fb{margin-top:14px;display:grid;gap:8px}
+.fb div{padding:10px 12px;border-radius:10px;border-left:6px solid var(--line);background:var(--bg)}
+.fb .good{background:var(--okbg);border-color:var(--ok)}
+.fb .bad{background:var(--kobg);border-color:var(--ko)}
+.fb .miss{background:var(--warnbg);border-color:var(--warn)}
+.verdict{font-weight:700;font-size:1.1rem}
+.next{margin-top:14px;padding:12px 22px;border:0;border-radius:12px;background:var(--brand);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.end{text-align:center;padding:20px 0}
+.two{display:grid;grid-template-columns:1fr 1.5fr;gap:10px}
+.col{display:grid;gap:8px;align-content:start}
+.m{padding:12px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;font-weight:700;cursor:pointer;text-align:left}
+.m.sm{font-weight:400;font-size:.93rem}
+.m[aria-pressed="true"]{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand) inset}
+.m.good{background:var(--okbg);border-color:var(--ok);cursor:default}
+.m.bad{background:var(--kobg);border-color:var(--ko)}
+.seq{display:grid;gap:8px}
+</style>
+</head>
+<body>
+<main>
+<h1>🧽 Repàs UD5.1: Neteja, desinfecció i manteniment</h1>
+<p class="sub">Sis jocs per repassar la unitat. Després de cada resposta veuràs per què les altres opcions són incorrectes.</p>
+<nav role="tablist"><button role="tab" id="t1" aria-selected="true">1 · Vertader o fals</button><button role="tab" id="t2" aria-selected="false">2 · Quin producte?</button><button role="tab" id="t3" aria-selected="false">3 · Ordena els passos</button><button role="tab" id="t4" aria-selected="false">4 · Relaciona</button><button role="tab" id="t5" aria-selected="false">5 · Troba l'error</button><button role="tab" id="t6" aria-selected="false">6 · Manteniment i plagues</button></nav>
+<section class="panel" id="app" aria-live="polite"></section>
+</main>
+<script>
+var app=document.getElementById('app');
+function end(s,n,again){var r=s/n;app.innerHTML='<div class="end"><div class="big">'+(r>.7?'🏅':'📚')+'</div><h2>'+s+' / '+n+'</h2><p>'+(r>.7?'Molt bé! Ho domines.':'Repassa el tema i torna-ho a provar.')+'</p><button class="next" id="rs">Torna a jugar</button></div>';document.getElementById('rs').onclick=again}
+function quiz(items,info,name){
+ var i=0,s=0;
+ (function go(){
+  if(i>=items.length){end(s,items.length,function(){i=0;s=0;go()});return}
+  var c=items[i],an=false;
+  app.innerHTML=(info?'<div class="info">'+info+'</div>':'')+'<div class="bar"><span>'+name+' '+(i+1)+' de '+items.length+'</span><span>Punts: '+s+'</span></div><div class="big">'+c.e+'</div><p class="q">'+c.t+'</p><div class="opts">'+c.o.map(function(o,k){return '<button data-k="'+k+'">'+o+'</button>'}).join('')+'</div><div class="fb" id="fb"></div>';
+  app.querySelectorAll('.opts button').forEach(function(b){b.onclick=function(){
+   if(an)return;an=true;var k=+b.dataset.k,ok=k===c.a;if(ok)s++;
+   app.querySelectorAll('.opts button').forEach(function(x,n){x.disabled=true;if(n===c.a){x.style.background='var(--okbg)';x.style.borderColor='var(--ok)'}else if(n===k){x.style.background='var(--kobg)';x.style.borderColor='var(--ko)'}});
+   var h='<div class="verdict">'+(ok?'✅ Correcte!':'❌ No exactament. La resposta és: '+c.o[c.a])+'</div>';
+   c.o.forEach(function(o,n){h+='<div class="'+(n===c.a?'good':(n===k?'bad':''))+'"><b>'+(n===c.a?'✅ ':'❌ ')+o+':</b> '+c.w[n]+'</div>'});
+   document.getElementById('fb').innerHTML=h+'<div><button class="next" id="nx">'+(i===items.length-1?'Veure resultat':'Següent')+'</button></div>';
+   document.getElementById('nx').onclick=function(){i++;go()};
+  }});
+ })();
+}
+function rel(R,r){
+ var d=R[r],right=d.p.map(function(x,k){return k}).sort(function(){return Math.random()-.5}),L=null,dn=0,er=0;
+ app.innerHTML='<div class="bar"><span>Ronda '+(r+1)+' de '+R.length+': '+d.n+'</span><span id="sc">Parelles: 0/'+d.p.length+' · Errors: 0</span></div><p class="q">Toca un terme i, després, la seva parella.</p><div class="two"><div class="col">'+d.p.map(function(x,k){return '<button class="m" data-s="l" data-k="'+k+'">'+x[0]+'</button>'}).join('')+'</div><div class="col">'+right.map(function(k){return '<button class="m sm" data-s="r" data-k="'+k+'">'+d.p[k][1]+'</button>'}).join('')+'</div></div><div class="fb" id="fb3"></div>';
+ var fb=document.getElementById('fb3'),sc=document.getElementById('sc');
+ app.querySelectorAll('.m').forEach(function(b){b.onclick=function(){
+  if(b.classList.contains('good'))return;var k=+b.dataset.k;
+  if(b.dataset.s==='l'){app.querySelectorAll('.m[data-s="l"]').forEach(function(x){x.setAttribute('aria-pressed','false')});L=k;b.setAttribute('aria-pressed','true');return}
+  if(L===null){fb.innerHTML='<div class="miss">Tria primer un terme de l\'esquerra.</div>';return}
+  var lb=app.querySelector('.m[data-s="l"][data-k="'+L+'"]');
+  if(k===L){lb.classList.add('good');b.classList.add('good');lb.setAttribute('aria-pressed','false');dn++;L=null;fb.innerHTML='<div class="good"><b>✅ Correcte:</b> '+d.p[k][0]+' → '+d.p[k][1]+'</div>'}
+  else{er++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad')},900);fb.innerHTML='<div class="bad"><b>❌ Incorrecte:</b> «'+d.p[L][0]+'» no correspon a aquesta opció. Aquesta opció pertany a «'+d.p[k][0]+'».</div>'}
+  sc.textContent='Parelles: '+dn+'/'+d.p.length+' · Errors: '+er;
+  if(dn===d.p.length){var last=r===R.length-1;fb.innerHTML+='<div class="verdict">🎉 Ronda completada amb '+er+' error(s).</div><div><button class="next" id="nx3">'+(last?'Torna a començar':'Ronda següent')+'</button></div>';document.getElementById('nx3').onclick=function(){rel(R,last?0:r+1)}}
+ }});
+}
+function ordena(OR,r){
+ var d=OR[r],k=0,er=0,n=d.i.length,order=d.i.map(function(x,j){return j}).sort(function(){return Math.random()-.5});
+ app.innerHTML='<div class="bar"><span>Ronda '+(r+1)+' de '+OR.length+': '+d.n+'</span><span id="sc">Ordenats: 0/'+n+' · Errors: 0</span></div><p class="q">Toca els passos en l\'ordre correcte.</p><div class="seq">'+order.map(function(j){return '<button class="m" data-j="'+j+'">'+d.i[j][0]+'</button>'}).join('')+'</div><div class="fb" id="fbo"></div>';
+ var fb=document.getElementById('fbo'),sc=document.getElementById('sc');
+ app.querySelectorAll('.m').forEach(function(b){b.onclick=function(){
+  if(b.classList.contains('good'))return;var j=+b.dataset.j;
+  if(j===k){b.classList.add('good');b.textContent=(k+1)+'. '+d.i[j][0]+' — '+d.i[j][1];k++;fb.innerHTML='<div class="good"><b>✅ Correcte:</b> '+d.i[j][0]+'</div>'}
+  else{er++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad')},900);fb.innerHTML='<div class="bad"><b>❌ «'+d.i[j][0]+'» encara no toca.</b> Això és: '+d.i[j][1]+'. Busca el pas que és: '+d.i[k][1]+'.</div>'}
+  sc.textContent='Ordenats: '+k+'/'+n+' · Errors: '+er;
+  if(k===n){var last=r===OR.length-1;fb.innerHTML+='<div class="verdict">🎉 Ronda completada amb '+er+' error(s).</div><div><button class="next" id="nxo">'+(last?'Torna a començar':'Ronda següent')+'</button></div>';document.getElementById('nxo').onclick=function(){ordena(OR,last?0:r+1)}}
+ }});
+}
+function mk(e,t,opts,desc,a,why){return {e:e,t:t,o:opts,a:opts.indexOf(a),w:opts.map(function(x){return x===a?why:desc(x)})}}
+function shuf(a){return a.slice().sort(function(){return Math.random()-.5})}
+
+var TF=[["La neteja i la desinfecció són exactament el mateix procés.", false, "Són dues accions independents i complementàries: la neteja elimina la brutícia; la desinfecció redueix els microorganismes."], ["Un element pot estar net i no estar desinfectat.", true, "Pot estar lliure de brutícia i tenir microorganismes que es poden transmetre als aliments."], ["La desinfecció elimina tots els patògens.", false, "No els elimina tots, però garanteix un nivell d'higiene suficient per evitar la contaminació creuada."], ["L'esterilització és una pràctica habitual a les cuines.", false, "No ho és: només en cuines molt grans es programa periòdicament."], ["El lleixiu s'ha d'usar sempre amb aigua freda.", true, "La calor desactiva el clor, que és l'element desinfectant."], ["El lleixiu s'aboca sobre superfícies brutes perquè neteji i desinfecti alhora.", false, "S'inactiva amb la matèria orgànica: s'ha d'abocar sobre superfícies ja netes."], ["Els desgreixadors són alcalins forts, amb un pH de 12 a 14.", true, "Per això dissolen tan bé el greix orgànic de la campana o la fregidora."], ["Els desincrustants són àcids.", true, "Amb un pH de 2 a 4 eliminen el greix inorgànic, com la calç o la brutícia del forn."], ["La dilució d'un producte amb aigua no ha de superar els 60 ºC.", true, "Per evitar que es descompongui."], ["Els draps de cotó són aptes per netejar la vaixella.", false, "No s'usen en cap tasca de neteja. Per a la vaixella: paper d'un sol ús o microfibra."], ["L'anàlisi microbiològica és un control subjectiu.", false, "És un control objectiu (mostres analitzades en un laboratori). El subjectiu és el control visual."], ["El terra és l'últim que es neteja.", true, "Hi cauen restes i brutícia de la neteja de parets, superfícies i equipaments."], ["Abans de netejar un equip de calor convé esperar que la temperatura baixi a 60-70 ºC.", true, "Amb l'equipament encara calent, la rentada és més eficaç."], ["Per netejar una cambra frigorífica cal deixar-la connectada perquè no es perdi el fred.", false, "Cal desconnectar-la del corrent i passar el gènere ràpidament a una altra cambra."], ["El Pla de manteniment només inclou actuacions correctives.", false, "Inclou actuacions preventives (programades) i correctives (quan hi ha una fallada)."], ["Els tractaments químics contra plagues són el primer recurs.", false, "Només s'apliquen si els altres mètodes no han funcionat, i els fa una empresa especialitzada."], ["Per retirar la brutícia grollera del terra convé una escombra humida.", true, "L'escombra seca aixeca massa pols."], ["Els productes de neteja es guarden en l'envàs original.", true, "I amb l'etiqueta en bon estat, lluny de les zones de manipulació d'aliments."]],PD={"Detergent": "un alcalí feble o neutre (pH 8-10) per a neteja manual o rentaplats", "Desgreixador": "un alcalí fort (pH 12-14) que dissol el greix orgànic", "Desincrustant": "un àcid (pH 2-4) que elimina la calç i la brutícia del forn", "Lleixiu": "un desinfectant ràpid i d'ampli espectre, corrosiu, que només va sobre superfície neta i amb aigua freda", "Amoni quaternari": "un desinfectant menys eficaç, però menys tòxic i menys corrosiu en metalls", "Ozó": "un desinfectant que s'aplica amb ozonitzadors i no deixa residu"},PC=[["🔥", "Calç incrustada i brutícia del forn", "Desincrustant", ["Desincrustant", "Desgreixador", "Lleixiu", "Ozó"], "Els àcids eliminen el greix inorgànic: calç i brutícia del forn."], ["🍳", "Greix acumulat a la campana extractora", "Desgreixador", ["Desgreixador", "Desincrustant", "Detergent", "Amoni quaternari"], "Els alcalins forts dissolen el greix orgànic."], ["🍽️", "Rentar la vaixella a mà", "Detergent", ["Detergent", "Desgreixador", "Ozó", "Lleixiu"], "Els alcalins febles o neutres serveixen per a neteja manual o rentaplats."], ["🧴", "Desinfectar una superfície ja neta amb un producte ràpid i d'ampli espectre", "Lleixiu", ["Lleixiu", "Detergent", "Desincrustant", "Desgreixador"], "És el desinfectant més habitual; cal esbandir-lo de seguida."], ["🔧", "Desinfectar equips metàl·lics evitant un producte corrosiu", "Amoni quaternari", ["Amoni quaternari", "Lleixiu", "Desincrustant", "Desgreixador"], "És menys corrosiu en metalls (però més car i fa escuma)."], ["💨", "Desinfectar amb un gas que torna a ser oxigen i no deixa residu", "Ozó", ["Ozó", "Lleixiu", "Amoni quaternari", "Detergent"], "S'aplica amb ozonitzadors i oxida bacteris, virus, fongs i espores."], ["🍟", "Greix de la fregidora", "Desgreixador", ["Desgreixador", "Detergent", "Desincrustant", "Ozó"], "El greix orgànic demana un alcalí fort."], ["🧼", "Rentaplats industrial amb un producte alcalí feble", "Detergent", ["Detergent", "Desgreixador", "Lleixiu", "Desincrustant"], "Els detergents (pH 8-10) són els agents netejadors manuals o del rentaplats."]],OR=[{"n": "🧽 Rentada manual (8 passos)", "i": [["Arrossegar la brutícia visible", "Amb paper d'un sol ús, sense producte"], ["Esbandir abans de res", "Amb aigua, preferiblement calenta"], ["Aplicar detergent i fregar", "Fins als racons; remull si cal"], ["Esbandir amb aigua calenta", "Per treure brutícia i detergent"], ["Aplicar el desinfectant", "Immersió, loció o polvorització"], ["Deixar actuar", "El temps que indiqui el fabricant"], ["Esbandida final", "Per treure les restes del desinfectant"], ["Assecar", "Amb paper absorbent d'un sol ús"]]}, {"n": "❄️ Cambra de fred (9 passos)", "i": [["Desconnectar de la xarxa elèctrica", "Netejar amb aigua és perillós"], ["Passar el gènere a una altra cambra", "Ràpidament, per no trencar la cadena de fred"], ["Treure i rentar a part les reixetes", "Els elements desmuntables"], ["Polvoritzar l'interior buit", "Deixar actuar, esbandir i eixugar"], ["Netejar portes i gomes", "Per garantir un tancament perfecte"], ["Revisar condensador, difusor i llums", "Que estiguin nets"], ["Muntar les reixetes", "Els elements desmuntables"], ["Rentar l'exterior i connectar", "Tornar a posar corrent"], ["Tornar a col·locar el gènere", "Últim pas"]]}, {"n": "🔥 Equips de calor (4 passos)", "i": [["Apagar i esperar 60-70 ºC", "Calent, la rentada és més eficaç"], ["Retirar les restes sòlides", "Abans d'aplicar productes"], ["Polvoritzar desgreixador i desincrustant", "Deixar actuar el temps necessari"], ["Fregar, esbandir i assecar", "Amb paper d'un sol ús"]]}, {"n": "🔪 Fustes i petits utensilis (5 passos)", "i": [["Treure brutícia grollera i posar en dissolució de detergent", "Remull si està molt brut"], ["Fregar", "Per eliminar la brutícia"], ["Esbandir amb aigua", "Per treure el detergent"], ["Desinfectar", "Per loció o polvorització"], ["Esbandir i eixugar", "Amb paper d'un sol ús"]]}],R=[{"n": "🧪 Higienització", "p": [["Higienització", "Neteja i desinfecció, dues accions complementàries"], ["Neteja", "Elimina la brutícia sense deteriorar la superfície"], ["Desinfecció", "Redueix els microorganismes per sota del llindar de seguretat"], ["Esterilització", "Elimina tota forma de vida, fins i tot les espores"], ["Detergent", "Substància que s'adhereix a la brutícia perquè s'elimini amb l'esbandida"], ["Desinfectant", "Producte químic o mètode físic que destrueix la majoria de patògens"]]}, {"n": "📋 Plans i controls", "p": [["Pla de manteniment", "Garanteix el bon estat i funcionament d'instal·lacions, equips i utensilis"], ["Pla de control de plagues", "Evita la presència d'insectes o rosegadors i, si cal, els elimina"], ["DDD", "Desinsectació, desratització i desinfecció"], ["Control visual", "Verificació subjectiva: observar l'estat de neteja"], ["Anàlisi microbiològica", "Verificació objectiva: mostres analitzades en un laboratori"], ["Controls fisicoquímics", "Verificació objectiva: temperatura de l'aigua, pH..."]]}, {"n": "🏢 Instal·lacions", "p": [["Paviment", "Antilliscant, no porós, de color clar, amb unió de mitja canya i desguàs"], ["Parets", "Llises, impermeables i de colors clars"], ["Portes", "De vaivé, amb obertura automàtica i sense manilles"], ["Finestres", "Llises, amb mosquiteres desmuntables que no s'oxidin"], ["Ventilació", "Independent, d'acer inoxidable i amb filtres desmuntables"], ["Il·luminació", "Amb protector de plàstic antitrencament"], ["Taules de treball", "D'acer inoxidable; la fusta i el marbre es descarten"]]}],ER={"Draps de cotó": "Seria un error si es fan servir draps de cotó per netejar: només microfibra o paper d'un sol ús.", "Barrejar productes": "Seria un error si es barregen productes: poden reaccionar entre ells.", "Dosi incorrecta": "Seria un error si la dosi és menor o major que la de l'etiqueta.", "Aigua calenta amb lleixiu": "Seria un error si s'usa lleixiu amb aigua calenta: la calor desactiva el clor.", "Desinfectar sense netejar": "Seria un error si no hi ha neteja prèvia: la brutícia inactiva el desinfectant.", "Aliments presents": "Seria un error si es neteja amb aliments a la zona: risc de contaminació química.", "Assecat a l'aire": "Seria un error si s'asseca a l'aire: la capa d'aigua afavoreix els microorganismes.", "Fregall metàl·lic": "Seria un error si s'usen fregalls metàl·lics: deixen filaments (perill físic).", "Terra primer": "Seria un error si el terra es neteja abans que la resta: hi cauen restes.", "Escombra seca": "Seria un error si s'escombra en sec: s'aixeca massa pols."},EC=[["🌡️", "El cuiner aboca lleixiu diluït en aigua bullent sobre la taula", "Aigua calenta amb lleixiu", ["Aigua calenta amb lleixiu", "Dosi incorrecta", "Draps de cotó", "Terra primer"]], ["🍲", "Es neteja la cuina mentre hi ha safates d'aliments destapades", "Aliments presents", ["Aliments presents", "Fregall metàl·lic", "Escombra seca", "Barrejar productes"]], ["🧽", "S'aplica el desinfectant sobre una superfície plena de restes", "Desinfectar sense netejar", ["Desinfectar sense netejar", "Assecat a l'aire", "Dosi incorrecta", "Draps de cotó"]], ["⚗️", "Es barreja detergent amb lleixiu «per desinfectar millor»", "Barrejar productes", ["Barrejar productes", "Terra primer", "Aigua calenta amb lleixiu", "Escombra seca"]], ["🍽️", "S'eixuga la vaixella amb un drap de cotó", "Draps de cotó", ["Draps de cotó", "Aliments presents", "Barrejar productes", "Fregall metàl·lic"]], ["🍳", "Es renten les paelles amb un fregall d'acer que deixa filaments", "Fregall metàl·lic", ["Fregall metàl·lic", "Dosi incorrecta", "Assecat a l'aire", "Terra primer"]], ["💧", "Es deixa el material rentat assecant-se a l'aire", "Assecat a l'aire", ["Assecat a l'aire", "Desinfectar sense netejar", "Escombra seca", "Aigua calenta amb lleixiu"]], ["🧹", "Es renta primer el terra i després les parets", "Terra primer", ["Terra primer", "Draps de cotó", "Barrejar productes", "Aliments presents"]], ["🌫️", "S'escombra el terra en sec", "Escombra seca", ["Escombra seca", "Fregall metàl·lic", "Dosi incorrecta", "Aigua calenta amb lleixiu"]], ["⚖️", "S'hi posa el doble de producte «per anar més segur»", "Dosi incorrecta", ["Dosi incorrecta", "Assecat a l'aire", "Aliments presents", "Desinfectar sense netejar"]]],MP=[["🔧", "Revisar cada mes l'estat dels fogons", "Manteniment preventiu"], ["🔥", "Substituir un forn que no funciona", "Manteniment correctiu"], ["🌡️", "Calibrar els termòmetres", "Manteniment preventiu"], ["🔪", "Reparar un ganivet amb la fulla inestable", "Manteniment correctiu"], ["🏚️", "Revisar el sostre per detectar esquerdes abans que es facin grans", "Manteniment preventiu"], ["❄️", "Reparar una cambra que no manté la temperatura", "Manteniment correctiu"]],PP=[["🪟", "Instal·lar mosquiteres a les finestres", "Mesura preventiva"], ["🪤", "Col·locar paranys mecànics per a rosegadors", "Mesura correctiva"], ["📦", "Guardar els productes a 20 cm del terra", "Mesura preventiva"], ["🧪", "Aplicar un insecticida (empresa especialitzada)", "Mesura correctiva"], ["💧", "Mantenir tancats els dipòsits d'aigua", "Mesura preventiva"], ["🦟", "Col·locar difusors de feromones", "Mesura correctiva"]];
+var G1=TF.map(function(x){return {e:'🧐',t:x[0],o:['Vertader','Fals'],a:x[1]?0:1,w:x[1]?[x[2],'No: aquesta afirmació és certa. '+x[2]]:['No: aquesta afirmació és falsa.',x[2]]}});
+var G2=PC.map(function(x){return mk(x[0],'Quin producte és el més adequat per a: '+x[1].toLowerCase()+'?',x[3],function(o){return 'No: «'+o+'» és '+PD[o]+'.'},x[2],x[4])});
+var G5=EC.map(function(x){return mk(x[0],'Què està malament? '+x[1],x[3],function(o){return 'Aquí no és el problema: «'+o+'» '+ER[o].charAt(0).toLowerCase()+ER[o].slice(1)},x[2],ER[x[2]].replace('Seria un error si','Aquí hi ha l\'error:'))});
+var DM={'Manteniment preventiu':'programat i sense urgència: revisió, manteniment o calibratge','Manteniment correctiu':'restableix la normalitat quan hi ha una fallada o deterioració: reparar o substituir','Mesura preventiva':'evita l\'entrada, l\'assentament i la multiplicació de les plagues','Mesura correctiva':'erradica una plaga ja present: captura o tractament químic, per empreses autoritzades'};
+function mk2(x){var o=x[2].indexOf('Manteniment')===0?['Manteniment preventiu','Manteniment correctiu']:['Mesura preventiva','Mesura correctiva'];return mk(x[0],x[1],o,function(z){return 'No: «'+z+'»: '+DM[z]+'.'},x[2],'Correcte: '+DM[x[2]]+'.')}
+var G6=MP.map(mk2).concat(PP.map(mk2));
+var TABS=[function(){quiz(G1,'Decideix si l\'afirmació és vertadera o falsa.','Afirmació')},function(){quiz(G2,'Tria el producte adequat a cada situació.','Cas')},function(){ordena(OR,0)},function(){rel(R,0)},function(){quiz(G5,'Troba quin és l\'error de cada situació.','Situació')},function(){quiz(G6,'Preventiu o correctiu?','Cas')}];
+function tab(n){for(var m=1;m<=6;m++)document.getElementById("t"+m).setAttribute("aria-selected",m===n);TABS[n-1]()}
+for(var m=1;m<=6;m++)(function(m){document.getElementById("t"+m).onclick=function(){tab(m)}})(m);
+tab(1);
+</script>
+</body>
+</html>
