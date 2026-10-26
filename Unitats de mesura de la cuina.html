@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unitats de mesura de la cuina</title>
+<style>
+:root{--bg:#fff6e0;--card:#ffffff;--ink:#5b3715;--mute:#8a6a4a;--or:#ff8a3d;--dor:#e8691a;--teal:#2ec4b6;--pink:#ff6b8b;--ok:#2e9e5b;--okbg:#e3f6ea;--ko:#d6336c;--kobg:#ffe3ec;--line:#f0dcb8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#241a10;--card:#33261a;--ink:#fbeedb;--mute:#cdb08f;--okbg:#17382a;--kobg:#45202e;--line:#4b3925;--ok:#6fdc9b;--ko:#ff8fb1}}
+:root[data-theme="dark"]{--bg:#241a10;--card:#33261a;--ink:#fbeedb;--mute:#cdb08f;--okbg:#17382a;--kobg:#45202e;--line:#4b3925;--ok:#6fdc9b;--ko:#ff8fb1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:linear-gradient(135deg,var(--or),var(--dor));color:#fff;padding:18px 16px 22px;border-radius:0 0 28px 28px}
+.wrap{max-width:720px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.badge{background:#fff;color:var(--dor);font-weight:800;border-radius:999px;padding:3px 12px;font-size:14px}
+h1{margin:8px 0 2px;font-size:26px;line-height:1.15}
+.sub{opacity:.95;font-size:14px}
+.score{background:rgba(0,0,0,.18);border-radius:999px;padding:4px 14px;font-weight:800}
+nav{display:flex;gap:8px;max-width:720px;margin:14px auto 0;padding:0 12px;overflow-x:auto}
+nav button{flex:1;min-width:110px;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:16px;padding:10px 8px;font-weight:700;font-size:14px;cursor:pointer}
+nav button.on{background:var(--teal);border-color:var(--teal);color:#fff}
+main{max-width:720px;margin:14px auto 40px;padding:0 12px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:18px}
+.prog{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:6px}
+.prog i{display:block;height:100%;background:var(--teal);transition:width .3s}
+.cnt{font-size:13px;color:var(--mute);margin-bottom:10px}
+.big{font-size:54px;text-align:center;margin:4px 0}
+.q{font-size:19px;font-weight:700;text-align:center;margin:6px 0 14px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.opts{grid-template-columns:1fr}}
+.opt{border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:16px;padding:14px 10px;font-size:16px;font-weight:700;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--or)}
+.opt.ok{background:var(--okbg);border-color:var(--ok)}
+.opt.ko{background:var(--kobg);border-color:var(--ko)}
+.fb{margin-top:14px;border-radius:16px;padding:12px 14px;font-size:15px}
+.fb.ok{background:var(--okbg);border-left:6px solid var(--ok)}
+.fb.ko{background:var(--kobg);border-left:6px solid var(--ko)}
+.btn{display:block;margin:14px auto 0;border:0;background:var(--or);color:#fff;font-weight:800;font-size:16px;border-radius:999px;padding:12px 28px;cursor:pointer}
+.btn.alt{background:var(--teal)}
+input.num{width:100%;font-size:26px;text-align:center;border:2px solid var(--line);border-radius:16px;padding:10px;background:var(--bg);color:var(--ink)}
+.eq{font-size:30px;font-weight:800;text-align:center;margin:10px 0 14px}
+.mt{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mt button{border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:14px;padding:12px 6px;font-weight:700;font-size:15px;cursor:pointer}
+.mt button.sel{border-color:var(--or);background:var(--card);box-shadow:0 0 0 3px var(--or) inset}
+.mt button.done{background:var(--okbg);border-color:var(--ok);color:var(--ok);cursor:default}
+.mt button.shake{animation:sh .35s}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.end{text-align:center}
+.end .big{font-size:72px}
+.rank{font-size:22px;font-weight:800;color:var(--dor)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.chip{border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:10px 16px;font-weight:800;cursor:pointer;font-size:16px}
+.chip.used{opacity:.35;pointer-events:none}
+.slot{min-width:64px;min-height:44px;border:2px dashed var(--mute);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;padding:0 10px}
+.slots{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.lt{color:var(--mute);align-self:center;font-weight:800}
+h3{margin:12px 0 2px;font-size:18px}
+.lad{display:flex;align-items:center;justify-content:center;gap:3px;flex-wrap:wrap;margin:8px 0}
+.step{border:2px solid var(--line);background:var(--bg);border-radius:14px;padding:8px 6px;min-width:56px;cursor:pointer;color:var(--ink);display:flex;flex-direction:column;align-items:center}
+.step b{font-size:22px}.step small{font-size:10px;color:var(--mute)}
+.step.key{border-color:var(--or);background:var(--card)}
+.step.sel{box-shadow:0 0 0 3px var(--teal) inset}
+.ar{font-size:10px;color:var(--mute);font-weight:800;text-align:center;line-height:1.1;width:26px}
+.fx{background:var(--okbg);border-left:6px solid var(--ok);border-radius:12px;padding:10px 12px;margin:6px 0 10px;font-size:15px}
+.rule{background:var(--bg);border:2px dashed var(--or);border-radius:16px;padding:12px 14px;margin:12px 0;font-size:15px}
+.mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}
+.mini div{border:2px solid var(--line);border-radius:12px;text-align:center;padding:8px 4px;font-size:13px;background:var(--bg)}
+.mini b{display:block;font-size:20px}
+.s{fill:var(--line)}.s.on{fill:var(--or)}
+.tgl{display:flex;gap:8px;margin:6px 0}
+.tgl button{flex:1;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:14px;padding:8px;font-weight:700;cursor:pointer}
+.tgl button.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.conv2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.conv2 div{border:2px solid var(--line);border-radius:12px;padding:8px 6px;text-align:center;background:var(--bg);font-size:14px;line-height:1.5}
+.conv2 b{font-size:19px}
+.chip.sel{border-color:var(--or);background:var(--card);box-shadow:0 0 0 3px var(--or) inset}
+footer{max-width:720px;margin:0 auto 28px;padding:0 12px;text-align:center;font-size:13px;color:var(--mute)}
+footer b{color:var(--ink)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="top"><span class="badge">IFE</span><span class="score">⭐ <span id="sc">0</span></span></div>
+  <h1>⚖️ Unitats de mesura de la cuina</h1>
+  <div class="sub">Litres, grams, dotzenes, unitats… Quina mesura va amb cada ingredient?</div>
+</div></header>
+<nav id="nav">
+  <button data-m="learn" class="on">📘 Aprèn</button>
+  <button data-m="quiz">🎯 Quina unitat?</button>
+  <button data-m="conv">🔁 Conversions</button>
+  <button data-m="match">🧩 Parelles</button>
+  <button data-m="sort">📏 Ordena</button>
+</nav>
+<main><div id="view" class="card"></div></main>
+<footer>Creat per <b>Elisa Palmada</b> · Actualitzat el 24 d’octubre de 2026</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let total=0;
+const addScore=n=>{total+=n;$("#sc").textContent=total};
+
+/* Explicacions per unitat (surten quan et confons) */
+const UN={
+ l:"Els litres (l) i els mil·lilitres (ml) mesuren el volum: serveixen per a líquids (llet, oli, aigua…).",
+ g:"Els grams (g) mesuren el pes: serveixen per a sòlids i pols (farina, sucre, mantega…).",
+ kg:"El quilo (kg) són 1000 g: s’usa per a quantitats grans de sòlids (tomàquets, patates…).",
+ u:"Les unitats serveixen per comptar peces senceres (un ou, una llimona…).",
+ dz:"Una dotzena són 12 unitats: s’usa per comptar coses petites en grup, com els ous.",
+ pe:"Un pessic és el que agafes amb dos dits: només per a quantitats molt petites (sal, espècies…).",
+ cu:"Una cullerada (de sopa) són uns 15 ml: serveix per a petites quantitats de líquids o pols.",
+ ma:"Un manat és un grup d’herbes aromàtiques lligades (julivert, menta…)."
+};
+const Q=[
+ {e:"🥛",q:"Vols mesurar el volum de la llet. Quina unitat serveix?",o:[["Litres (l)","l"],["Grams (g)","g"],["Unitats","u"],["Dotzenes","dz"]],a:0,w:"La llet és un líquid: el volum es mesura en litres o mil·lilitres."},
+ {e:"🌾",q:"Pesar la farina d’una massa. Quina unitat usaràs?",o:[["Litres (l)","l"],["Grams (g)","g"],["Dotzenes","dz"],["Pessics","pe"]],a:1,w:"La farina és un sòlid en pols: es pesa en grams."},
+ {e:"🥚",q:"Compres 24 ous per al restaurant. Quantes dotzenes són?",o:[["2 dotzenes","dz"],["4 dotzenes",null,"4 dotzenes serien 48 ous (4 × 12)."],["12 dotzenes",null,"12 dotzenes serien 144 ous (12 × 12)."],["24 dotzenes",null,"24 dotzenes serien 288 ous: massa!"]],a:0,w:"24 ÷ 12 = 2 dotzenes."},
+ {e:"🥚",q:"Una recepta demana mitja dotzena d’ous. Quants ous són?",o:[["6 ous","dz"],["12 ous",null,"12 ous és una dotzena sencera."],["3 ous",null,"3 ous és un quart de dotzena."],["24 ous",null,"24 ous són dues dotzenes."]],a:0,w:"Una dotzena són 12; la meitat són 6 ous."},
+ {e:"🧂",q:"Salar a ull, agafant la sal amb dos dits. Quina mesura és?",o:[["Un quilo (kg)","kg"],["Un pessic","pe"],["Una dotzena","dz"],["Un litre","l"]],a:1,w:"Un pessic és la mesura de les quantitats molt petites."},
+ {e:"🍯",q:"Mesures uns 15 ml de mel amb una cullera gran de sopa.",o:[["1 pessic","pe"],["1 cullerada","cu"],["1 litre","l"],["1 dotzena","dz"]],a:1,w:"Una cullerada de sopa són uns 15 ml."},
+ {e:"🍅",q:"Compres tomàquets per a una salsa per a 30 persones: 5 ___",o:[["Pessics","pe"],["Mil·lilitres (ml)","l"],["Quilos (kg)","kg"],["Cullerades","cu"]],a:2,w:"Per a quantitats grans de sòlids s’usen els quilos."},
+ {e:"🌿",q:"El julivert fresc es ven lligat en un grup. Com es compta?",o:[["Un litre","l"],["Un manat","ma"],["Una dotzena","dz"],["Un mil·lilitre","l"]],a:1,w:"Les herbes aromàtiques es compten en manats."},
+ {e:"🫒",q:"Oli per a fregir: calen 2 ___",o:[["Dotzenes","dz"],["Litres (l)","l"],["Pessics","pe"],["Unitats","u"]],a:1,w:"L’oli és un líquid: es mesura en litres."},
+ {e:"🍋",q:"Compta les llimones senceres: n’hi ha 3 ___",o:[["Litres (l)","l"],["Pessics","pe"],["Unitats","u"],["Quilos (kg)","kg"]],a:2,w:"Les peces senceres es compten per unitats."},
+ {e:"💧",q:"Una ampolla petita d’aigua té 500 ___",o:[["Mil·lilitres (ml)","l"],["Quilos (kg)","kg"],["Pessics","pe"],["Dotzenes","dz"]],a:0,w:"L’aigua és un líquid: 500 ml és mig litre."},
+ {e:"☕",q:"Una cullereta de cafè de llevat són aproximadament…",o:[["5 ml","cu"],["15 ml",null,"15 ml és una cullerada de sopa, més gran."],["50 ml",null,"50 ml és molt més: unes tres cullerades i mitja!"],["500 ml",null,"500 ml és mig litre!"]],a:0,w:"Una cullereta de cafè són uns 5 ml."},
+ {e:"🧈",q:"Una recepta demana ¼ kg de mantega. Quants grams són?",o:[["250 g","g"],["500 g",null,"500 g és ½ kg (la meitat)."],["100 g",null,"100 g no és ¼ de kg: ¼ de 1000 g és 1000 ÷ 4 = 250 g."],["750 g",null,"750 g són ¾ de kg (tres quarts)."]],a:0,w:"Un quart és la quarta part: 1000 g ÷ 4 = 250 g."},
+ {e:"🥛",q:"Tens ½ litre de llet. Quants mil·lilitres són?",o:[["500 ml","l"],["250 ml",null,"250 ml és ¼ de litre (un quart)."],["50 ml",null,"50 ml és molt poc: només una vintena part d’un litre."],["1000 ml",null,"1000 ml és 1 litre sencer."]],a:0,w:"La meitat de 1000 ml són 500 ml."}
+];
+const C=[
+ ["2 kg = ___ g",2000,"1 kg = 1000 g, així que 2 × 1000 = 2000 (afegeix tres zeros)."],
+ ["3 kg = ___ g",3000,"1 kg = 1000 g, així que 3 × 1000."],
+ ["½ kg = ___ g",500,"La meitat de 1000 g són 500 g."],
+ ["¼ kg = ___ g",250,"Un quart: 1000 ÷ 4 = 250 g."],
+ ["¾ kg = ___ g",750,"Tres quarts: 3 × 250 = 750 g."],
+ ["1500 g = ___ kg",1.5,"1000 g = 1 kg, així que 1500 ÷ 1000 = 1,5 kg."],
+ ["250 g = ___ kg (fracció o decimal)",0.25,"250 g és un quart de quilo: ¼ = 0,25 kg."],
+ ["2 l = ___ ml",2000,"1 l = 1000 ml, així que 2 × 1000 = 2000 (afegeix tres zeros)."],
+ ["½ l = ___ ml",500,"La meitat de 1000 ml són 500 ml."],
+ ["¼ l = ___ ml",250,"Un quart: 1000 ÷ 4 = 250 ml."],
+ ["¾ l = ___ ml",750,"Tres quarts: 3 × 250 = 750 ml."],
+ ["2500 ml = ___ l",2.5,"1000 ml = 1 l, així que 2500 ÷ 1000 = 2,5 l."],
+ ["500 ml = ___ l (fracció o decimal)",0.5,"500 ml és la meitat d’un litre: ½ = 0,5 l."],
+ ["Una recepta porta ½ kg de farina i la dobles. Quants grams són?",1000,"Dos mig quilos fan 1 kg = 1000 g."],
+ ["3 dotzenes = ___ unitats",36,"1 dotzena = 12 unitats: 3 × 12."],
+ ["Una truita porta 10 ous. Quantes dotzenes has de comprar com a mínim?",1,"10 ous caben en 1 dotzena (12 ous)."]
+];
+const P=[["1 kg","1000 g","1 kg són 1000 g."],["½ kg","500 g","Mig quilo són 500 g."],["¼ kg","250 g","Un quart de quilo són 250 g."],["1 l","1000 ml","1 litre són 1000 mil·lilitres."],["½ l","500 ml","Mig litre són 500 ml."],["¼ l","250 ml","Un quart de litre són 250 ml."],["1 dotzena","12 unitats","Una dotzena són 12 unitats."],["mitja dotzena","6 unitats","Mitja dotzena són 6 unitats."],["1 parell","2 unitats","Un parell són 2 unitats."],["1 cullerada","≈ 15 ml","Una cullerada de sopa són uns 15 ml."]];
+const S=[
+ {t:"Ordena de menys a més pes",it:[["¼ kg",250],["½ kg",500],["¾ kg",750],["1 kg",1000]]},
+ {t:"Ordena de menys a més volum",it:[["¼ l",250],["½ l",500],["¾ l",750],["1 l",1000]]},
+ {t:"Ordena de menys a més pes (grams i quilos barrejats)",it:[["300 g",300],["½ kg",500],["800 g",800],["1,5 kg",1500]]},
+ {t:"Ordena de menys a més ous",it:[["1 ou",1],["mitja dotzena",6],["1 dotzena",12],["2 dotzenes",24]]}
+];
+const num=s=>{s=s.trim().replace(",",".");if(s.includes("/")){const[a,b]=s.split("/");return parseFloat(a)/parseFloat(b)}return parseFloat(s)};
+
+const view=$("#view");
+function prog(i,n){return `<div class="prog"><i style="width:${Math.round(i/n*100)}%"></i></div><div class="cnt">${Math.min(i+1,n)} de ${n}</div>`}
+function end(mode,ok,n,pts){
+  addScore(ok*pts);
+  const p=Math.round(ok/n*100);
+  const r=p>=90?["🏆","Xef/xefa de cuina!"]:p>=60?["👨‍🍳","Bon cuiner/a!"]:["🥄","Aprenent de cuina: torna-ho a provar!"];
+  view.innerHTML=`<div class="end"><div class="big">${r[0]}</div><div class="rank">${r[1]}</div><p>Has encertat <b>${ok}</b> de <b>${n}</b> (${p} %) i has guanyat <b>${ok*pts}</b> punts.</p><button class="btn" id="again">Torna a jugar</button><button class="btn alt" id="next">Un altre joc</button></div>`;
+  $("#again").onclick=()=>go(mode);
+  const order=["quiz","conv","match","sort"];
+  $("#next").onclick=()=>go(order[(order.indexOf(mode)+1)%order.length]);
+}
+
+function quiz(){
+  const qs=shuffle(Q).slice(0,10);let i=0,ok=0,lock=false;
+  (function draw(){
+    if(i>=qs.length)return end("quiz",ok,qs.length,10);
+    const q=qs[i],opts=shuffle(q.o.map((o,k)=>({o,k}))),right=q.o[q.a][0];lock=false;
+    view.innerHTML=prog(i,qs.length)+`<div class="big">${q.e}</div><div class="q">${q.q}</div><div class="opts">${opts.map(x=>`<button class="opt" data-k="${x.k}">${x.o[0]}</button>`).join("")}</div><div id="fb"></div>`;
+    view.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      if(lock)return;lock=true;const k=+b.dataset.k,good=k===q.a;
+      view.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(+x.dataset.k===q.a)x.classList.add("ok")});
+      if(good){ok++;$("#fb").innerHTML=`<div class="fb ok">✅ <b>Correcte!</b> ${q.w}</div>`}
+      else{b.classList.add("ko");const o=q.o[k];$("#fb").innerHTML=`<div class="fb ko">❌ <b>Ho tornaràs a provar!</b> ${o[2]||UN[o[1]]||""}<br>✅ La bona era <b>${right}</b>. ${q.w}</div>`}
+      $("#fb").insertAdjacentHTML("beforeend",`<button class="btn" id="nx">${i+1<qs.length?"Següent":"Veure resultat"}</button>`);
+      $("#nx").onclick=()=>{i++;draw()};
+    });
+  })();
+}
+
+function conv(){
+  const qs=shuffle(C).slice(0,8);let i=0,ok=0;
+  (function draw(){
+    if(i>=qs.length)return end("conv",ok,qs.length,15);
+    const q=qs[i];
+    view.innerHTML=prog(i,qs.length)+`<div class="big">🧮</div><div class="eq">${q[0]}</div><input class="num" id="in" inputmode="decimal" autocomplete="off" placeholder="Escriu la resposta"><div id="fb"></div><button class="btn" id="chk">Comprova</button>`;
+    const inp=$("#in");inp.focus();
+    const check=()=>{
+      const v=num(inp.value);if(isNaN(v))return;
+      const good=Math.abs(v-q[1])<1e-9;if(good)ok++;
+      const fmt=String(q[1]).replace(".",",");
+      $("#fb").innerHTML=good?`<div class="fb ok">✅ <b>Molt bé!</b> ${q[2]}</div>`:`<div class="fb ko">❌ Has escrit <b>${inp.value}</b>. La resposta és <b>${fmt}</b>.<br>💡 ${q[2]}</div>`;
+      inp.disabled=true;const b=$("#chk");b.textContent=i+1<qs.length?"Següent":"Veure resultat";b.onclick=()=>{i++;draw()};
+    };
+    $("#chk").onclick=check;inp.onkeydown=e=>{if(e.key==="Enter"){if(inp.disabled)$("#chk").click();else check()}};
+  })();
+}
+
+function match(){
+  const L=shuffle(P),R=shuffle(P);let sel=null,done=0;const bad=new Set();
+  view.innerHTML=`<div class="q">Toca una mesura i després la seva equivalència.</div><div class="mt"><div style="display:grid;gap:10px" id="cl"></div><div style="display:grid;gap:10px" id="cr"></div></div><div id="fb"></div>`;
+  L.forEach(p=>{const b=document.createElement("button");b.textContent=p[0];b.dataset.k=p[0];$("#cl").appendChild(b);
+    b.onclick=()=>{if(b.classList.contains("done"))return;$("#cl").querySelectorAll("button").forEach(x=>x.classList.remove("sel"));sel=p;b.classList.add("sel")}});
+  R.forEach(p=>{const b=document.createElement("button");b.textContent=p[1];b.dataset.k=p[0];$("#cr").appendChild(b);
+    b.onclick=()=>{
+      if(!sel||b.classList.contains("done"))return;
+      if(sel[0]===p[0]){
+        done++;b.classList.add("done");const lb=[...$("#cl").children].find(x=>x.dataset.k===p[0]);lb.classList.remove("sel");lb.classList.add("done");
+        $("#fb").innerHTML=`<div class="fb ok">✅ ${p[2]}</div>`;sel=null;
+        if(done===P.length)setTimeout(()=>end("match",P.length-bad.size,P.length,10),900);
+      }else{
+        bad.add(sel[0]);b.classList.add("shake");setTimeout(()=>b.classList.remove("shake"),400);
+        $("#fb").innerHTML=`<div class="fb ko">❌ <b>${sel[0]}</b> no és <b>${p[1]}</b>. Recorda: ${sel[2]}</div>`;
+      }
+    }});
+}
+
+function sort(){
+  const rs=shuffle(S);let i=0,ok=0;
+  (function draw(){
+    if(i>=rs.length)return end("sort",ok,rs.length,20);
+    const r=rs[i],correct=r.it.slice().sort((a,b)=>a[1]-b[1]).map(x=>x[0]);let pick=[];
+    view.innerHTML=prog(i,rs.length)+`<div class="big">📏</div><div class="q">${r.t}</div><div class="slots" id="sl"></div><div class="chips" id="ch"></div><div id="fb"></div>`;
+    const chips=shuffle(r.it);
+    const paint=()=>{
+      $("#sl").innerHTML=[0,1,2,3].map(n=>`<span class="slot">${pick[n]||"?"}</span>${n<3?'<span class="lt">&lt;</span>':""}`).join("");
+      $("#ch").innerHTML=chips.map(c=>`<button class="chip ${pick.includes(c[0])?"used":""}" data-n="${c[0]}">${c[0]}</button>`).join("");
+      $("#ch").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{pick.push(b.dataset.n);paint();if(pick.length===4)verify()});
+    };
+    const verify=()=>{
+      const good=pick.every((x,n)=>x===correct[n]);if(good)ok++;
+      $("#ch").innerHTML="";
+      $("#fb").innerHTML=good?`<div class="fb ok">✅ <b>Ordre perfecte!</b> ${correct.join(" &lt; ")}</div>`:`<div class="fb ko">❌ Aquest ordre no és correcte. L’ordre bo és: <b>${correct.join(" &lt; ")}</b>.<br>💡 Passa-ho tot a la mateixa unitat (g o ml) i compara els números.</div>`;
+      $("#fb").insertAdjacentHTML("beforeend",`<button class="btn" id="nx">${i+1<rs.length?"Següent":"Veure resultat"}</button>`);
+      $("#nx").onclick=()=>{i++;draw()};
+    };
+    paint();
+  })();
+}
+
+function learn(){
+  let tm="w",ts=0;
+  const TD={
+   w:[[1000,"1 kg","tot el públic","un paquet de sucre d’1 kg"],[750,"¾ kg (750 g)","tres quarts del públic","tres quarts d’un paquet de farina d’1 kg"],[500,"½ kg (500 g)","la meitat del públic","un paquet d’espaguetis"],[250,"¼ kg (250 g)","un quart del públic","una pastilla de mantega"],[1,"1 g","una sola persona","la unitat més petita: una persona del públic"]],
+   v:[[1000,"1 l","tot el públic","un brik de llet"],[750,"¾ l (750 ml)","tres quarts del públic","tres quarts d’un brik de llet"],[500,"½ l (500 ml)","la meitat del públic","una ampolla petita d’aigua"],[250,"¼ l (250 ml)","un quart del públic","un got gran"],[1,"1 ml","una sola persona","unes 20 gotes, aproximadament"]]};
+  view.innerHTML=`<div class="q">Com funcionen les mesures? 📘</div>`
+   +`<h3>🎭 1 kg és com un teatre ple</h3><p id="ti" style="margin:4px 0 8px"></p><div class="tgl"><button id="tw" class="on">⚖️ Pes (kg i g)</button><button id="tv">🥛 Volum (l i ml)</button></div><svg id="th" viewBox="0 0 500 250" style="width:100%;height:auto" role="img" aria-label="Teatre amb 1000 espectadors"></svg><div class="chips" id="tc"></div><div class="fx" id="tf"></div>`
+   +`<h3>🔁 Quilos i grams, litres i mil·lilitres</h3><div class="conv2"><div><b>1 kg</b><br>×1000 →<br><b>1000 g</b></div><div><b>1000 g</b><br>÷1000 →<br><b>1 kg</b></div><div><b>1 l</b><br>×1000 →<br><b>1000 ml</b></div><div><b>1000 ml</b><br>÷1000 →<br><b>1 l</b></div></div>`
+   +`<h3>½ La meitat i els quarts</h3><div class="mini" style="grid-template-columns:repeat(3,1fr)"><div><b>½ kg</b>500 g</div><div><b>¼ kg</b>250 g</div><div><b>¾ kg</b>750 g</div><div><b>½ l</b>500 ml</div><div><b>¼ l</b>250 ml</div><div><b>¾ l</b>750 ml</div></div>`
+   +`<div class="rule"><b>🔑 Regla d’or:</b> de kg a g (o de l a ml) es multiplica per <b>1000</b>: afegeix tres zeros. Per tornar enrere, es divideix per 1000.<br><br>📌 <b>2 kg = 2000 g</b> i <b>1500 g = 1,5 kg</b>.<br>📌 <b>La meitat</b> és 1000 g ÷ 2 = <b>500 g</b>.<br>📌 <b>Un quart</b> és 1000 ml ÷ 4 = <b>250 ml</b>.<br>📌 <b>Tres quarts</b> són 3 × 250 = <b>750</b>.</div>`
+   +`<h3>🥚 Per comptar: unitats, parells i dotzenes</h3><div class="mini"><div><b>1</b>unitat</div><div><b>2</b>1 parell</div><div><b>6</b>mitja dotzena</div><div><b>12</b>1 dotzena</div></div><button class="btn" id="go">Ja ho tinc! Anem a jugar</button>`;
+  let sv='<rect x="100" y="4" width="300" height="24" rx="8" style="fill:var(--or)"/><text x="250" y="20" text-anchor="middle" style="fill:#fff;font:700 12px system-ui,sans-serif">ESCENARI</text>';
+  for(let i=0;i<1000;i++){sv+=`<circle class="s" cx="${(15+(i%50)*9.4).toFixed(1)}" cy="${42+Math.floor(i/50)*10}" r="3.6"/>`}
+  $("#th").innerHTML=sv;
+  const paint=()=>{
+    const d=TD[tm][ts],n=d[0],big=tm==="w"?"1 kg":"1 l",one=tm==="w"?"1 g":"1 ml";
+    $("#ti").innerHTML=`Imagina un teatre amb <b>1000 persones</b>: tot el públic és <b>${big}</b> i cada persona és <b>${one}</b>. Si només ve una part del públic, tens menys quantitat.`;
+    $("#th").querySelectorAll(".s").forEach((c,i)=>c.classList.toggle("on",i<n));
+    $("#tc").innerHTML=TD[tm].map((x,i)=>`<button class="chip ${i===ts?"sel":""}" data-i="${i}">${x[1]}</button>`).join("");
+    $("#tc").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{ts=+b.dataset.i;paint()});
+    $("#tf").innerHTML=`<b>${d[1]}</b> = ${n} de 1000 persones: ${d[2]}.<br>🍽️ Exemple: ${d[3]}.`;
+    $("#tw").classList.toggle("on",tm==="w");$("#tv").classList.toggle("on",tm==="v");
+  };
+  $("#tw").onclick=()=>{tm="w";paint()};$("#tv").onclick=()=>{tm="v";paint()};
+  paint();
+  $("#go").onclick=()=>go("quiz");
+}
+const modes={learn,quiz,conv,match,sort};
+function go(m){document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.m===m));modes[m]()}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>go(b.dataset.m));
+go("learn");
+</script>
+</body>
+</html>
